@@ -1,0 +1,54 @@
+/* 275 */
+.menu {
+  position: fixed;
+  width: 275px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #2c2c2c;
+  color: #ffffff;
+}
+ion-icon {
+  font-size: 0.9em;
+  margin-right: 5px;
+}
+.menu__user {
+  margin-top: 20px;
+  margin-left: 50px;
+  width: 180px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 40px;
+}
+.menu__user__name {
+  font-size: 16pt;
+  font-weight: 700;
+  line-height: 1;
+}
+.menu__user__email {
+  font-size: 10pt;
+  font-weight: 300;
+  margin-top: -1px;
+}
+
+.menu__item {
+  margin-left: 50px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.menu__item a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.menu__item a span {
+  color: #ffffff;
+  text-decoration: none;
+}
+.menu__item a:hover {
+  transition: 0.2s all;
+  color: #cccccc;
+}
+.menu__item_active a {
+  color: #668fa9;
+}
