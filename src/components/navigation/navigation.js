@@ -1,22 +1,25 @@
 import React from "react";
 import "./navigation.css";
+import { Link } from "react-router-dom";
 
 const Navigation = props => {
   return (
     <nav className="menu">
-      <div className="menu__user">
-        <div className="menu__user__name">Иванов Иван</div>
-        <div className="menu__user__email">ivanov.ivan@mail.ru</div>
-      </div>
+      <Link to="/profile">
+        <div className="menu__user">
+          <div className="menu__user__name">Иванов Иван</div>
+          <div className="menu__user__email">ivanov.ivan@mail.ru</div>
+        </div>
+      </Link>
       <div className="menu__item menu__item_active ">
-        <a href="#">
+        <Link to="/">
           <ion-icon name="bar-chart"></ion-icon>Акуальные задачи
-        </a>
+        </Link>
       </div>
       <div className="menu__item">
-        <a href="#">
+        <Link to="/projects">
           <ion-icon name="folder"></ion-icon>Проекты
-        </a>
+        </Link>
       </div>
     </nav>
   );
