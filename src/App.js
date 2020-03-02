@@ -19,13 +19,8 @@ function App() {
               render={() => <DashboardPage></DashboardPage>}
               exact
             />
-            <Route
-              path="/projects"
-              render={() => <ProjectPage></ProjectPage>}
-              exact
-            />
+            <Route path="/projects" component={ProjectPage} />
             <Route path="/profile" render={() => <ProfilePage />} exact />
-            <Route path="/projects/:id" render={() => <h1>gg</h1>} />
           </Switch>
         </div>
       </Router>
