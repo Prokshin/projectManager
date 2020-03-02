@@ -3,7 +3,9 @@ import "./App.css";
 
 import Navigation from "./components/navigation";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { DashboardPage, ProjectPage, ProfilePage } from "./components/pages";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
@@ -11,13 +13,19 @@ function App() {
       <Router>
         <Navigation />
         <div className="content">
-          <Route path="/" render={() => <h2>Актуальные задачи</h2>} exact />
-          <Route path="/projects" render={() => <h2>Проекты </h2>} exact />
-          <Route
-            path="/profile"
-            render={() => <h2>Профиль пользователя </h2>}
-            exact
-          />
+          <Switch>
+            <Route
+              path="/"
+              render={() => <DashboardPage></DashboardPage>}
+              exact
+            />
+            <Route
+              path="/projects"
+              render={() => <ProjectPage></ProjectPage>}
+              exact
+            />
+            <Route path="/profile" render={() => <ProfilePage />} exact />
+          </Switch>
         </div>
       </Router>
     </div>
