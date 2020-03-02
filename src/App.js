@@ -14,13 +14,15 @@ function App() {
         <Navigation />
         <div className="content">
           <Switch>
-            <Route
-              path="/"
-              render={() => <DashboardPage></DashboardPage>}
-              exact
-            />
-            <Route path="/projects" component={ProjectPage} />
-            <Route path="/profile" render={() => <ProfilePage />} exact />
+            <Route path="/" exact>
+              <DashboardPage />
+            </Route>
+            <Route path="/projects">
+              <ProjectPage />
+            </Route>
+            <Route path="/profile">
+              <ProfilePage />
+            </Route>
           </Switch>
         </div>
       </Router>

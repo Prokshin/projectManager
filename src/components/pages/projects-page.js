@@ -10,6 +10,7 @@ import {
   useParams
 } from "react-router-dom";
 import Card from "../card";
+import ProjectsList from "../projects-list";
 
 const ProjectsPage = props => {
   const match = useRouteMatch();
@@ -19,12 +20,7 @@ const ProjectsPage = props => {
       <Switch>
         <Route exact path={`/projects`}>
           <Header text="Проекты" icon="folder"></Header>
-          <div className="flex-wrapper">
-            <Card></Card>
-            <Card></Card>
-            <Card></Card>
-            <Card></Card>
-          </div>
+          <ProjectsList />
         </Route>
         <Route path={`/projects/:projectId`}>
           <ProjectItemPage></ProjectItemPage>

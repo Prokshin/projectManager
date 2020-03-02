@@ -4,8 +4,8 @@ import { withRouter } from "react-router";
 
 class ProjectItemPagefff extends Component {
   render() {
-    const { match, location, history } = this.props;
-    console.log(match, location, history);
+    const { match } = this.props;
+
     return (
       <div>
         <Header text="Имя проекта" icon="folder"></Header>

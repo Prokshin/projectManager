@@ -1,17 +1,17 @@
 import React from "react";
-
 import "./card.css";
+import { Link } from "react-router-dom";
 
-const Card = () => {
+const Card = props => {
+  const { title, description, path } = props;
   return (
-    <div className="card">
-      <h2 className="card__title">Проект 1</h2>
-      <p className="card__description">
-        Разработка системы управления проектами, с использованием иерархического
-        структурирования бизнес задач
-      </p>
-      <button className="card__button">Подробнее</button>
-    </div>
+    <Link to={path}>
+      <div className="card">
+        <h2 className="card__title">{title}</h2>
+        <p className="card__description">{description}</p>
+        <button className="card__button">Подробнее</button>
+      </div>
+    </Link>
   );
 };
 export default Card;
