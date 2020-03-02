@@ -8,6 +8,7 @@ class ProjectItemPagefff extends Component {
     console.log(match, location, history);
     return (
       <div>
+        gg
         <Header text="Имя проекта" icon="folder"></Header>
       </div>
     );

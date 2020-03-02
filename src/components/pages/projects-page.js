@@ -3,22 +3,19 @@ import Header from "../header";
 import { ProjectItemPage } from "../pages";
 
 import { Link, Switch, Route } from "react-router-dom";
+import Card from "../card";
 
 export default class ProjectsPage extends Component {
   render() {
     return (
       <div>
-        <Switch>
-          <Route path="/projects" exact>
-            <Header text="Проекты" icon="folder"></Header>
-            <Link to="/projects/1">Проект 1</Link>
-          </Route>
-          <Route
-            path="/projects/:id"
-            render={() => <ProjectItemPage />}
-            exact
-          />
-        </Switch>
+        <Header text="Проекты" icon="folder"></Header>
+        <div className="flex-wrapper">
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+        </div>
       </div>
     );
   }

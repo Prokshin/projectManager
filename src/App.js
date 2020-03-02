@@ -25,6 +25,7 @@ function App() {
               exact
             />
             <Route path="/profile" render={() => <ProfilePage />} exact />
+            <Route path="/projects/:id" render={() => <h1>gg</h1>} />
           </Switch>
         </div>
       </Router>
