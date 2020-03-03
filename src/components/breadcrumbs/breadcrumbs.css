@@ -1,0 +1,12 @@
+.breadcrumbs {
+  margin: 20px 0 0 50px;
+  font-size: 12px;
+  font-weight: 300;
+}
+.breadcrumbs a {
+  text-decoration: underline;
+}
+.breadcrumbs ion-icon {
+  position: relative;
+  margin-bottom: -2px;
+}

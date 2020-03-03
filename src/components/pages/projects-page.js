@@ -1,20 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import Header from "../header";
-import { ProjectItemPage, ProjectPage } from "../pages";
+import { ProjectItemPage } from "../pages";
 
-import {
-  Link,
-  Switch,
-  Route,
-  useRouteMatch,
-  useParams
-} from "react-router-dom";
-import Card from "../card";
+import { Switch, Route } from "react-router-dom";
+
 import ProjectsList from "../projects-list";
 
 const ProjectsPage = props => {
-  const match = useRouteMatch();
-  console.log(match);
   return (
     <div>
       <Switch>

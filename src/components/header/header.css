@@ -3,3 +3,8 @@
   font-size: 32px;
   margin-left: 50px;
 }
+.header__description {
+  margin-left: 50px;
+  margin-top: -10px;
+  margin-right: 50px;
+}

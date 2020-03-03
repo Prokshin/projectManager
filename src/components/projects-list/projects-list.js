@@ -12,7 +12,6 @@ export default class projectsList extends Component {
   apiService = new ApiService();
   componentDidMount() {
     this.apiService.getAllProjects().then(res => {
-      console.log(res);
       this.setState({ projects: res });
     });
   }

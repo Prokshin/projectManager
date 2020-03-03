@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import Header from "../header";
-import { withRouter } from "react-router";
+import React from "react";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
+import CategoryList from "../category-list";
 
-class ProjectItemPagefff extends Component {
-  render() {
-    const { match } = this.props;
-
-    return (
-      <div>
-        <Header text="Имя проекта" icon="folder"></Header>
-      </div>
-    );
-  }
-}
-const ProjectItemPage = withRouter(ProjectItemPagefff);
+const ProjectItemPage = props => {
+  const match = useRouteMatch();
+  return (
+    <div>
+      <Switch>
+        <Route exact path={match.url}>
+          <CategoryList projectId={match.params.projectId} />
+        </Route>
+        <Route path={`${match.url}/:id`}>Страница категории</Route>
+      </Switch>
+    </div>
+  );
+};
 export default ProjectItemPage;
