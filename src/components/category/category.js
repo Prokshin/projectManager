@@ -3,6 +3,7 @@ import ApiService from "../../services/api-service";
 import Card from "../card";
 import { withRouter } from "react-router-dom";
 import Header from "../header";
+import Group from "../group/group";
 
 class Category_ extends Component {
   constructor(props) {
@@ -11,18 +12,16 @@ class Category_ extends Component {
       category: { groups: [] }
     };
   }
+  //Запрос на сервер
   apiService = new ApiService();
-
   componentDidMount() {
-    console.log(this.props.projectId);
     this.apiService.getCategory(0).then(res => {
-      console.log(res);
       this.setState({
         category: res
       });
     });
   }
-
+  //Создание массива карточек групп
   renderItems() {
     let i = 0;
     console.log(this.state.category.groups);
@@ -44,7 +43,6 @@ class Category_ extends Component {
   render() {
     const items = this.renderItems();
     const { category } = this.state;
-    console.log(this.props);
     return (
       <div>
         <Header
@@ -54,7 +52,7 @@ class Category_ extends Component {
         />
         <div className="flex-wrapper">{items}</div>
         <Header text="Задачи основной группы" icon="albums" size="middle" />
-        Задачи
+        <Group type="without_header" />
       </div>
     );
   }

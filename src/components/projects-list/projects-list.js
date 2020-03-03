@@ -9,12 +9,14 @@ export default class projectsList extends Component {
       projects: []
     };
   }
+  //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
     this.apiService.getAllProjects().then(res => {
       this.setState({ projects: res });
     });
   }
+  //Создание массива карточек проектов
   renderItems() {
     return this.state.projects.map(el => {
       return (

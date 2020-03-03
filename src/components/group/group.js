@@ -14,9 +14,7 @@ class Group_ extends Component {
   apiService = new ApiService();
 
   componentDidMount() {
-    console.log(this.props.projectId);
-    this.apiService.getGroup(0).then(res => {
-      console.log(res);
+    this.apiService.getGroup().then(res => {
       this.setState({
         group: res
       });
@@ -25,7 +23,6 @@ class Group_ extends Component {
 
   renderItems() {
     let i = 0;
-    console.log(this.state.group.tasks);
     return this.state.group.tasks.map(el => {
       if (el.id === "main") {
         return "";
@@ -41,17 +38,26 @@ class Group_ extends Component {
     });
   }
 
+  renderHeader() {
+    if (this.props.type === "without_header") {
+      return "";
+    } else {
+      return (
+        <Header
+          text={this.state.group.title}
+          icon="albums"
+          description={this.state.group.description}
+        />
+      );
+    }
+  }
+
   render() {
     const items = this.renderItems();
-    const { group } = this.state;
-    console.log(this.props);
+    const header = this.renderHeader();
     return (
       <div>
-        <Header
-          text={group.title}
-          icon="library"
-          description={group.description}
-        />
+        {header}
         <div className="flex-wrapper">{items}</div>
       </div>
     );

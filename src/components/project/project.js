@@ -5,15 +5,15 @@ import { withRouter } from "react-router-dom";
 import Bredcrumbs from "../breadcrumbs";
 import Header from "../header";
 
-class CategoryList_ extends Component {
+class Project_ extends Component {
   constructor(props) {
     super(props);
     this.state = {
       project: { category: [{}] }
     };
   }
+  //Запрос на сервер
   apiService = new ApiService();
-
   componentDidMount() {
     console.log(this.props.projectId);
     this.apiService.getProject(this.props.projectId).then(res => {
@@ -22,7 +22,7 @@ class CategoryList_ extends Component {
       });
     });
   }
-
+  //Создание массива карточек категорий
   renderItems() {
     let i = 0;
     return this.state.project.category.map(el => {
@@ -60,5 +60,5 @@ class CategoryList_ extends Component {
   }
 }
 
-const CategoryList = withRouter(CategoryList_);
-export default CategoryList;
+const Project = withRouter(Project_);
+export default Project;

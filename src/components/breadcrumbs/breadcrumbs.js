@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./breadcrumbs.css";
-
+//! Продумать получение данных о родителях
 const Breadcrumbs = props => {
   let first = true;
   const links = props.links.map(el => {

@@ -4,6 +4,7 @@ import "./header.css";
 
 const Header = props => {
   let size = "";
+  //!Сделать несколько вариантов размерности
   if (props.size === "middle") {
     size = "header_size_m";
   }

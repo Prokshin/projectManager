@@ -2,6 +2,7 @@ import React from "react";
 import "./card.css";
 import { Link } from "react-router-dom";
 
+//!Добавить статусы, тип; для задач - проект > категорию, deadline.
 const Card = props => {
   const { title, description, path } = props;
   return (

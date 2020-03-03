@@ -15,7 +15,7 @@ const ProjectsPage = props => {
           <ProjectsList />
         </Route>
         <Route path={`/projects/:projectId`}>
-          <ProjectItemPage></ProjectItemPage>
+          <ProjectItemPage />
         </Route>
       </Switch>
     </div>

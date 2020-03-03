@@ -2,6 +2,7 @@ import React from "react";
 import "./navigation.css";
 import { Link } from "react-router-dom";
 
+//!Реализовать раскрывающиеся пункты, с подгрузкой данных с сервера.
 const Navigation = props => {
   return (
     <nav className="menu">
