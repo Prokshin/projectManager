@@ -57,10 +57,41 @@ export default class ApiService {
       ]
     }
   ];
+
+  _category = {
+    id: "01",
+    title: "Дизайн",
+    description:
+      "Очень длинное описание категории, в которой будет разрабатываться внешний вид инетерфейсв приложения",
+    groups: [
+      {
+        id: "main",
+        title: "основная категория"
+      },
+      {
+        id: "001",
+        title: "UI",
+        description: "описание UI"
+      },
+      {
+        id: "002",
+        title: "Рекламные банеры",
+        description: "описание UI"
+      },
+      {
+        id: "003",
+        title: "Айдентика",
+        description: "описание UI"
+      }
+    ]
+  };
   getAllProjects = async () => {
     return this._pojects;
   };
   getProject = async id => {
     return this._pojects[id];
+  };
+  getCategory = async id => {
+    return this._category;
   };
 }
