@@ -4,29 +4,29 @@ import Card from "../card";
 import { withRouter } from "react-router-dom";
 import Header from "../header";
 
-class Category_ extends Component {
+class Group_ extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: { groups: [] }
+      group: { tasks: [] }
     };
   }
   apiService = new ApiService();
 
   componentDidMount() {
     console.log(this.props.projectId);
-    this.apiService.getCategory(0).then(res => {
+    this.apiService.getGroup(0).then(res => {
       console.log(res);
       this.setState({
-        category: res
+        group: res
       });
     });
   }
 
   renderItems() {
     let i = 0;
-    console.log(this.state.category.groups);
-    return this.state.category.groups.map(el => {
+    console.log(this.state.group.tasks);
+    return this.state.group.tasks.map(el => {
       if (el.id === "main") {
         return "";
       }
@@ -43,22 +43,20 @@ class Category_ extends Component {
 
   render() {
     const items = this.renderItems();
-    const { category } = this.state;
+    const { group } = this.state;
     console.log(this.props);
     return (
       <div>
         <Header
-          text={category.title}
+          text={group.title}
           icon="library"
-          description={category.description}
+          description={group.description}
         />
         <div className="flex-wrapper">{items}</div>
-        <Header text="Задачи основной группы" icon="albums" size="middle" />
-        Задачи
       </div>
     );
   }
 }
 
-const Category = withRouter(Category_);
-export default Category;
+const Group = withRouter(Group_);
+export default Group;

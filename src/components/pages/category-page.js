@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import Category from "../category";
+import GroupPage from "./group-page";
 
 const CategoryPage = () => {
   const match = useRouteMatch();
@@ -10,7 +11,9 @@ const CategoryPage = () => {
         <Route exact path={match.url}>
           <Category />
         </Route>
-        <Route path={`${match.url}/:groupId`}>Страница группы</Route>
+        <Route path={`${match.url}/:groupId`}>
+          <GroupPage />
+        </Route>
       </Switch>
     </div>
   );

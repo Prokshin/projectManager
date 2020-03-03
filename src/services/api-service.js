@@ -85,6 +85,36 @@ export default class ApiService {
       }
     ]
   };
+
+  _group = {
+    id: "001",
+    title: "UI",
+    description:
+      "Дизайн пользовательского интерфейса приложения. Используется adobe xd.",
+    tasks: [
+      {
+        id: "0001",
+        title: "Заголовок 1 задачи",
+        description: "Описание 1 задачи"
+      },
+      {
+        id: "0002",
+        title: "Заголовок 2 задачи",
+        description: "Описание 3 задачи"
+      },
+      {
+        id: "0003",
+        title: "Заголовок 3 задачи",
+        description: "Описание 3 задачи"
+      },
+      {
+        id: "0004",
+        title: "Заголовок 4 задачи",
+        description: "Описание 4 задачи"
+      }
+    ]
+  };
+
   getAllProjects = async () => {
     return this._pojects;
   };
@@ -93,5 +123,8 @@ export default class ApiService {
   };
   getCategory = async id => {
     return this._category;
+  };
+  getGroup = async id => {
+    return this._group;
   };
 }
