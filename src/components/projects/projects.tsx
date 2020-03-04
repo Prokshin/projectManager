@@ -33,7 +33,6 @@ export default class Projects extends Component<{}, IProjectsState> {
         <Card
           key={el.id}
           id={el.id}
-          path={`/projects/${el.id}`}
           title={el.title}
           description={el.description}
         />

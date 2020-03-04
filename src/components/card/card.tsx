@@ -8,7 +8,6 @@ export interface CardProps {
   id?: string;
   title?: string;
   description?: string;
-  path?: string;
 }
 
 const Card: React.FC<CardProps> = props => {

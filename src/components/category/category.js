@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
-import { withRouter } from "react-router-dom";
 import Header from "../header";
 import Group from "../group/group";
 
-class Category_ extends Component {
+export default class Category extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +14,7 @@ class Category_ extends Component {
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService.getCategory(0).then(res => {
+    this.apiService.getCategory(this.props.categoryId).then(res => {
       this.setState({
         category: res
       });
@@ -32,7 +31,7 @@ class Category_ extends Component {
       return (
         <Card
           key={i++}
-          path={`${this.props.match.url}/${el.id}`}
+          id={el.id}
           title={el.title}
           description={el.description}
         />
@@ -57,6 +56,3 @@ class Category_ extends Component {
     );
   }
 }
-
-const Category = withRouter(Category_);
-export default Category;

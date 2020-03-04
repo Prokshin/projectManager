@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
-import { RouteComponentProps, useParams } from "react-router-dom";
 import Header from "../header";
 
-interface IProjectProps extends RouteComponentProps<any> {
-  projectId: string;
-  match: any;
+interface IProjectProps {
+  projectId?: string;
 }
 
 interface IProjectState {
@@ -42,6 +40,9 @@ export default class Project extends Component<IProjectProps, IProjectState> {
   apiService = new ApiService();
   componentDidMount() {
     console.log(this.props.projectId);
+    if (!this.props.projectId) {
+      return 0;
+    }
     this.apiService.getProject(this.props.projectId).then((res: any) => {
       this.setState({
         project: res
@@ -56,7 +57,6 @@ export default class Project extends Component<IProjectProps, IProjectState> {
         <Card
           key={i++}
           id={el.id}
-          path={`/${el.id}`}
           title={el.title}
           description={el.description}
         />
