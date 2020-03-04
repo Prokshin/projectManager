@@ -1,20 +1,39 @@
 import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
-import { withRouter } from "react-router-dom";
 import Header from "../header";
 
-class Group_ extends Component {
-  constructor(props) {
+interface IGroupProps {
+  type?: string;
+  groupId?: string;
+}
+
+interface IGroupState {
+  group: {
+    id?: string;
+    title?: string;
+    description?: string;
+    tasks: [
+      {
+        id?: string;
+        title?: string;
+        description?: string;
+      }
+    ];
+  };
+}
+
+export default class Group extends Component<IGroupProps, IGroupState> {
+  constructor(props: IGroupProps) {
     super(props);
     this.state = {
-      group: { tasks: [] }
+      group: { tasks: [{}] }
     };
   }
   apiService = new ApiService();
 
   componentDidMount() {
-    this.apiService.getGroup().then(res => {
+    this.apiService.getGroup(this.props.groupId).then((res: any) => {
       this.setState({
         group: res
       });
@@ -23,21 +42,16 @@ class Group_ extends Component {
 
   renderItems() {
     let i = 0;
-    let url = this.props.match.url;
-    if (this.props.type === "without_header") {
-      url = `${this.props.match.url}/main`;
-    }
     return this.state.group.tasks.map(el => {
       if (el.id === "main") {
         return "";
       }
+      let id = el.id;
+      if (this.props.type === "without_header") {
+        id = `main/${el.id}`;
+      }
       return (
-        <Card
-          key={i++}
-          path={`${url}/${el.id}`}
-          title={el.title}
-          description={el.description}
-        />
+        <Card key={i++} id={id} title={el.title} description={el.description} />
       );
     });
   }
@@ -67,6 +81,3 @@ class Group_ extends Component {
     );
   }
 }
-
-const Group = withRouter(Group_);
-export default Group;

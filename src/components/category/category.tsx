@@ -50,7 +50,6 @@ export default class Category extends Component<
   //Создание массива карточек групп
   renderItems() {
     let i = 0;
-    console.log(this.state.category.groups);
     return this.state.category.groups.map(el => {
       if (el.id === "main") {
         return "";

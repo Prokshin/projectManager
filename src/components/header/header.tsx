@@ -5,7 +5,7 @@ import "./header.css";
 export interface HeaderProps {
   size?: string;
   icon?: string;
-  text: string;
+  text?: string;
   description?: string;
 }
 
