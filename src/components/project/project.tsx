@@ -1,22 +1,48 @@
 import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
-import { withRouter } from "react-router-dom";
-import Bredcrumbs from "../breadcrumbs";
+import { RouteComponentProps } from "react-router-dom";
 import Header from "../header";
 
-class Project_ extends Component {
-  constructor(props) {
+interface IProjectProps extends RouteComponentProps<any> {
+  projectId: string;
+  match: any;
+}
+
+interface IProjectState {
+  project: {
+    id: string;
+    title: string;
+    description?: string;
+    creator?: string;
+    category: [
+      {
+        id?: string;
+        description?: string;
+        title?: string;
+      }
+    ];
+  };
+}
+
+export default class Project extends Component<IProjectProps, IProjectState> {
+  constructor(props: IProjectProps) {
     super(props);
     this.state = {
-      project: { category: [{}] }
+      project: {
+        id: "",
+        title: "",
+        description: "",
+        creator: "",
+        category: [{}]
+      }
     };
   }
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
     console.log(this.props.projectId);
-    this.apiService.getProject(this.props.projectId).then(res => {
+    this.apiService.getProject(this.props.projectId).then((res: any) => {
       this.setState({
         project: res
       });
@@ -29,7 +55,8 @@ class Project_ extends Component {
       return (
         <Card
           key={i++}
-          path={`${this.props.match.url}/${el.id}`}
+          id={el.id}
+          path={`/${el.id}`}
           title={el.title}
           description={el.description}
         />
@@ -39,16 +66,15 @@ class Project_ extends Component {
 
   render() {
     const items = this.renderItems();
-    const { match } = this.props;
     const { project } = this.state;
     return (
       <div>
-        <Bredcrumbs
+        {/* <Bredcrumbs
           links={[
             { url: "/projects", name: "Проекты" },
             { url: `${match.url}`, name: `${project.title}` }
           ]}
-        />
+        /> */}
         <Header
           text={project.title}
           icon="folder"
@@ -59,6 +85,3 @@ class Project_ extends Component {
     );
   }
 }
-
-const Project = withRouter(Project_);
-export default Project;

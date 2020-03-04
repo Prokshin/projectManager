@@ -1,19 +1,22 @@
 import React from "react";
 import "./card.css";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 
 //!Добавить статусы, тип; для задач - проект > категорию, deadline.
 
 export interface CardProps {
-  title: string;
-  description: string;
-  path: string;
+  id?: string;
+  title?: string;
+  description?: string;
+  path?: string;
 }
 
 const Card: React.FC<CardProps> = props => {
-  const { title, description, path } = props;
+  const match = useRouteMatch();
+  console.log(match);
+  const { title, description, id = "" } = props;
   return (
-    <Link to={path}>
+    <Link to={`${match.url}/${id}`}>
       <div className="card">
         <h2 className="card__title">{title}</h2>
         <p className="card__description">{description}</p>

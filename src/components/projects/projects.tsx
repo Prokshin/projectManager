@@ -2,17 +2,27 @@ import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
 
-export default class projectsList extends Component {
-  constructor(props) {
+interface ProjectsInterface {
+  projects: [
+    {
+      id?: string;
+      title?: string;
+      description?: string;
+    }
+  ];
+}
+
+export default class Projects extends Component<{}, ProjectsInterface> {
+  constructor(props: {}) {
     super(props);
     this.state = {
-      projects: []
+      projects: [{}]
     };
   }
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService.getAllProjects().then(res => {
+    this.apiService.getAllProjects().then((res: any) => {
       this.setState({ projects: res });
     });
   }
@@ -22,6 +32,7 @@ export default class projectsList extends Component {
       return (
         <Card
           key={el.id}
+          id={el.id}
           path={`/projects/${el.id}`}
           title={el.title}
           description={el.description}

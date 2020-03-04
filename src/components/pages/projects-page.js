@@ -4,7 +4,7 @@ import { ProjectItemPage } from "../pages";
 
 import { Switch, Route } from "react-router-dom";
 
-import ProjectsList from "../projects-list";
+import Projects from "../projects";
 
 const ProjectsPage = props => {
   return (
@@ -12,7 +12,7 @@ const ProjectsPage = props => {
       <Switch>
         <Route exact path={`/projects`}>
           <Header text="Проекты" icon="folder"></Header>
-          <ProjectsList />
+          <Projects />
         </Route>
         <Route path={`/projects/:projectId`}>
           <ProjectItemPage />
