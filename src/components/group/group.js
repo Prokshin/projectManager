@@ -23,6 +23,10 @@ class Group_ extends Component {
 
   renderItems() {
     let i = 0;
+    let url = this.props.match.url;
+    if (this.props.type === "without_header") {
+      url = `${this.props.match.url}/main`;
+    }
     return this.state.group.tasks.map(el => {
       if (el.id === "main") {
         return "";
@@ -30,7 +34,7 @@ class Group_ extends Component {
       return (
         <Card
           key={i++}
-          path={`${this.props.match.url}/${el.id}`}
+          path={`${url}/${el.id}`}
           title={el.title}
           description={el.description}
         />

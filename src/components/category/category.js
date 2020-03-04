@@ -47,7 +47,7 @@ class Category_ extends Component {
       <div>
         <Header
           text={category.title}
-          icon="library"
+          icon="shapes"
           description={category.description}
         />
         <div className="flex-wrapper">{items}</div>

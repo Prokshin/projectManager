@@ -7,7 +7,7 @@ import { DashboardPage, ProjectPage, ProfilePage } from "./components/pages";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Router>
@@ -28,6 +28,6 @@ function App() {
       </Router>
     </div>
   );
-}
+};
 
 export default App;
