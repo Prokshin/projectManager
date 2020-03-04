@@ -31,3 +31,12 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+//Icon Font
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "ion-icon": any;
+    }
+  }
+}

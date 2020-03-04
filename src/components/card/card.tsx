@@ -3,7 +3,14 @@ import "./card.css";
 import { Link } from "react-router-dom";
 
 //!Добавить статусы, тип; для задач - проект > категорию, deadline.
-const Card = props => {
+
+export interface CardProps {
+  title: string;
+  description: string;
+  path: string;
+}
+
+const Card: React.FC<CardProps> = props => {
   const { title, description, path } = props;
   return (
     <Link to={path}>

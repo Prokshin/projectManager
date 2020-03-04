@@ -3,7 +3,8 @@ import "./navigation.css";
 import { Link } from "react-router-dom";
 
 //!Реализовать раскрывающиеся пункты, с подгрузкой данных с сервера.
-const Navigation = props => {
+export interface NavigationProps {}
+const Navigation = () => {
   return (
     <nav className="menu">
       <Link to="/profile">
