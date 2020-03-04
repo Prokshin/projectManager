@@ -6,7 +6,7 @@ import GroupPage from "./group-page";
 const CategoryPage = () => {
   const match = useRouteMatch();
   const { categoryId } = useParams();
-  console.log(categoryId);
+
   return (
     <div>
       <Switch>

@@ -4,17 +4,44 @@ import Card from "../card";
 import Header from "../header";
 import Group from "../group/group";
 
-export default class Category extends Component {
-  constructor(props) {
+interface ICategoryProps {
+  categoryId?: string;
+}
+interface ICategoryState {
+  category: {
+    id: string;
+    title: string;
+    description?: string;
+    creator?: string;
+    groups: [
+      {
+        id?: string;
+        description?: string;
+        title?: string;
+      }
+    ];
+  };
+}
+
+export default class Category extends Component<
+  ICategoryProps,
+  ICategoryState
+> {
+  constructor(props: ICategoryProps) {
     super(props);
     this.state = {
-      category: { groups: [] }
+      category: {
+        id: "",
+        title: "",
+        description: "",
+        groups: [{}]
+      }
     };
   }
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService.getCategory(this.props.categoryId).then(res => {
+    this.apiService.getCategory(this.props.categoryId).then((res: any) => {
       this.setState({
         category: res
       });

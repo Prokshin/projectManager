@@ -29,6 +29,9 @@ export default class Projects extends Component<{}, IProjectsState> {
   //Создание массива карточек проектов
   renderItems() {
     return this.state.projects.map(el => {
+      if (el.id === undefined) {
+        return <span key="loading">Загрузка данных</span>;
+      }
       return (
         <Card
           key={el.id}
