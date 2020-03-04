@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
 
-interface ProjectsInterface {
+interface IProjectsState {
   projects: [
     {
       id?: string;
@@ -12,7 +12,7 @@ interface ProjectsInterface {
   ];
 }
 
-export default class Projects extends Component<{}, ProjectsInterface> {
+export default class Projects extends Component<{}, IProjectsState> {
   constructor(props: {}) {
     super(props);
     this.state = {

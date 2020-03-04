@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../header";
-import { ProjectItemPage } from "../pages";
+import { ProjectItemPage } from ".";
 
 import { Switch, Route } from "react-router-dom";
 
 import Projects from "../projects";
 
-const ProjectsPage = props => {
+const ProjectsPage = () => {
   return (
     <div>
       <Switch>

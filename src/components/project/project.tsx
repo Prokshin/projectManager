@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, useParams } from "react-router-dom";
 import Header from "../header";
 
 interface IProjectProps extends RouteComponentProps<any> {
