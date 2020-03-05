@@ -115,16 +115,29 @@ export default class ApiService {
     ]
   };
 
+  _task = {
+    id: "00000",
+    title: "Дизайн главной страницы",
+    description: "Создания внешнего вида и структуры главной страницы сайта",
+    text: "nnnnnnnnn"
+  };
   getAllProjects = async () => {
     return this._pojects;
   };
-  getProject = async id => {
-    return this._pojects[id];
+  getProject = async (id?: string) => {
+    if (!id) {
+      return [];
+    }
+    let id_num: number = parseInt(id);
+    return this._pojects[id_num];
   };
-  getCategory = async id => {
+  getCategory = async (id?: string) => {
     return this._category;
   };
-  getGroup = async id => {
+  getGroup = async (id?: string) => {
     return this._group;
+  };
+  getTask = async (id?: string) => {
+    return this._task;
   };
 }

@@ -1,0 +1,19 @@
+.task {
+  background-color: #ffffff;
+  margin: 20px 50px 0 50px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  padding: 5px 25px 15px;
+}
+.task__title {
+  border-bottom: 1px solid #f3f3f3;
+}
+.task__description {
+  font-weight: 300;
+  font-size: 12px;
+
+  margin-top: -20px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f3f3f3;
+}

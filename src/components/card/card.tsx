@@ -12,7 +12,7 @@ export interface CardProps {
 
 const Card: React.FC<CardProps> = props => {
   const match = useRouteMatch();
-  console.log(match);
+
   const { title, description, id = "" } = props;
   return (
     <Link to={`${match.url}/${id}`}>
