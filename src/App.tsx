@@ -6,6 +6,7 @@ import Navigation from "./components/navigation";
 import { DashboardPage, ProjectPage, ProfilePage } from "./components/pages";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CreatePage from "./components/pages/create-page";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,9 @@ const App: React.FC = () => {
           <Switch>
             <Route path="/" exact>
               <DashboardPage />
+            </Route>
+            <Route path="/create">
+              <CreatePage />
             </Route>
             <Route path="/projects">
               <ProjectPage />

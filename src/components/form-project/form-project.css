@@ -1,0 +1,39 @@
+.form-project {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.form-project__block {
+  border-bottom: 1px solid #ccc;
+}
+.form-project__description {
+  width: 30%;
+}
+.form-project__description h2 {
+  margin: 0;
+  padding: 0;
+}
+.form-project__inputs {
+  width: 60%;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+.form-project__inputs__label {
+  font-size: 12px;
+  margin: 0;
+}
+.form-project__inputs__input {
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 700;
+}
+.form-project__inputs__block {
+  margin-bottom: 15px;
+}

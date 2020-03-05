@@ -13,6 +13,11 @@ const Navigation = () => {
           <div className="menu__user__email">ivanov.ivan@mail.ru</div>
         </div>
       </Link>
+      <div className="menu__item">
+        <Link to="/create">
+          <ion-icon name="add-circle"></ion-icon>Создать
+        </Link>
+      </div>
       <div className="menu__item  ">
         <Link to="/">
           <ion-icon name="bar-chart"></ion-icon>Акуальные задачи

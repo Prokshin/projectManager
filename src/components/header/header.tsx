@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = props => {
   return (
     <Fragment>
       <h1 className={`header ${size}`}>
-        <ion-icon name={props.icon}></ion-icon>
+        <ion-icon name={props.icon}/>
         {props.text}
       </h1>
       <p className="header__description">{props.description}</p>

@@ -7,3 +7,31 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+.button {
+  padding: 10px;
+  background-color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  font-weight: 700;
+  margin-right: 10px;
+  transition: 0.2s all;
+  opacity: 1;
+  border: none;
+}
+.button:hover {
+  opacity: 0.8;
+  transition: 0.2s all;
+}
+
+.blue-bg {
+  color: #fff;
+  background-color: #668fa9;
+}
+.green-bg {
+  color: #fff;
+  background-color: #4bae6f;
+}
+.wrap {
+  margin: 50px 50px;
+}
