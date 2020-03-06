@@ -19,13 +19,9 @@ interface IProjects {
 }
 
 const GroupInputs = (props: ICategoryInputsProps) => {
-  const [projectc, setProjectc] = useState([
-    { id: "", name: "Загрузка данных" }
-  ]);
+  const [projectc, setProjectc] = useState([{ id: "", name: "Загрузка данных" }]);
 
-  const [category, setCategory] = useState([
-    { id: "", name: "Загрузка данных" }
-  ]);
+  const [category, setCategory] = useState([{ id: "", name: "Загрузка данных" }]);
 
   const apiService = new ApiService();
   const LoadProjrct = async () => {
@@ -39,7 +35,6 @@ const GroupInputs = (props: ICategoryInputsProps) => {
 
   useEffect((): void => {
     LoadProjrct();
-    // eslint-disable-next-line
   }, []);
 
   const handle = async (e: React.FormEvent<HTMLSelectElement>) => {
@@ -48,11 +43,7 @@ const GroupInputs = (props: ICategoryInputsProps) => {
   };
   return (
     <div className="form-project__inputs">
-      <select
-        className="form-project__inputs__select"
-        value={props.projectIdValue}
-        onChange={handle}
-      >
+      <select className="form-project__inputs__select" value={props.projectIdValue} onChange={handle}>
         <option value="" hidden>
           Выберите проект
         </option>
@@ -82,11 +73,7 @@ const GroupInputs = (props: ICategoryInputsProps) => {
       </select>
       <div className="form-project__inputs__block">
         <p className="form-project__inputs__label">Название</p>
-        <input
-          value={props.nameValue}
-          onChange={props.HandleChangeName}
-          className="form-project__inputs__input"
-        />
+        <input value={props.nameValue} onChange={props.HandleChangeName} className="form-project__inputs__input" />
       </div>
 
       <p className="form-project__inputs__label">Описание</p>
