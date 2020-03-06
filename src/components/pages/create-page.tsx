@@ -3,6 +3,7 @@ import Header from "../header";
 import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
 import FormProject from "../form-project";
 import FormCategory from "../form-category";
+import FormGroup from "../form-group";
 
 const CreatePage = () => {
   const match = useRouteMatch();
@@ -32,7 +33,7 @@ const CreatePage = () => {
           <FormCategory />
         </Route>
         <Route path={`${match.url}/group`}>
-          <h2>Создание группы</h2>
+          <FormGroup />
         </Route>
         <Route path={`${match.url}/task`}>
           <h2>Создание задачи</h2>

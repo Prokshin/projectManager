@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import "./form-category.css";
 import ApiService from "../../services/api-service";
 
 interface ICategoryInputsProps {
@@ -10,6 +9,8 @@ interface ICategoryInputsProps {
   HandleChangeDescription: (event: React.FormEvent<HTMLInputElement>) => void;
   projectIdValue: string;
   HandleChangeProject: (selected: React.FormEvent<HTMLSelectElement>) => void;
+  categoryIdValue: string;
+  HandleChangeCategory: (selected: React.FormEvent<HTMLSelectElement>) => void;
 }
 
 interface IProjects {
@@ -17,33 +18,61 @@ interface IProjects {
   name: string;
 }
 
-const CategoryInputs = (props: ICategoryInputsProps) => {
-  const [projects, setProjects] = useState([
+const GroupInputs = (props: ICategoryInputsProps) => {
+  const [projectc, setProjectc] = useState([
+    { id: "", name: "Загрузка данных" }
+  ]);
+
+  const [category, setCategory] = useState([
     { id: "", name: "Загрузка данных" }
   ]);
 
   const apiService = new ApiService();
-  const LoadData = async () => {
+  const LoadProjrct = async () => {
     const res: IProjects[] = await apiService.getAllProjectsMin();
-    setProjects(res);
+    setProjectc(res);
+  };
+  const LoadCategories = async (id: string) => {
+    const res: IProjects[] = await apiService.getCategoriesMin(id);
+    setCategory(res);
   };
 
   useEffect((): void => {
-    console.log("gg");
-    LoadData();
+    LoadProjrct();
     // eslint-disable-next-line
   }, []);
+
+  const handle = async (e: React.FormEvent<HTMLSelectElement>) => {
+    props.HandleChangeProject(e);
+    await LoadCategories(e.currentTarget.value);
+  };
   return (
     <div className="form-project__inputs">
       <select
         className="form-project__inputs__select"
         value={props.projectIdValue}
-        onChange={props.HandleChangeProject}
+        onChange={handle}
       >
         <option value="" hidden>
           Выберите проект
         </option>
-        {projects.map(data => {
+        {projectc.map(data => {
+          return (
+            <option key={data.id} value={data.id}>
+              {data.name}
+            </option>
+          );
+        })}
+      </select>
+      <select
+        className="form-project__inputs__select"
+        value={props.categoryIdValue}
+        onChange={props.HandleChangeCategory}
+      >
+        <option value="" hidden>
+          Выберите категорию
+        </option>
+        {category.map(data => {
           return (
             <option key={data.id} value={data.id}>
               {data.name}
@@ -70,4 +99,4 @@ const CategoryInputs = (props: ICategoryInputsProps) => {
   );
 };
 
-export default CategoryInputs;
+export default GroupInputs;

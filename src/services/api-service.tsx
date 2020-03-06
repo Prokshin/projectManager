@@ -132,6 +132,18 @@ export default class ApiService {
       name: "Сайт web студии"
     }
   ];
+
+  _categoryMin = [
+    {
+      id: "0_0",
+      name: "Дизайн"
+    },
+    {
+      id: "0_1",
+      name: "Frontend"
+    }
+  ];
+
   getAllProjects = async () => {
     return this._pojects;
   };
@@ -144,6 +156,13 @@ export default class ApiService {
     }
     let id_num: number = parseInt(id);
     return this._pojects[id_num];
+  };
+  getCategoriesMin = async (id: string) => {
+    if (id === "") {
+      return [];
+    }
+    console.log(`Загрзка категорий проекта ${id}`);
+    return this._categoryMin;
   };
   getCategory = async (id?: string) => {
     return this._category;

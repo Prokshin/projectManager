@@ -37,3 +37,7 @@
 .form-project__inputs__block {
   margin-bottom: 15px;
 }
+
+.form-project__inputs__select {
+  margin-right: 10px;
+}
