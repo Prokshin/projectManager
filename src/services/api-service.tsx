@@ -121,8 +121,22 @@ export default class ApiService {
     description: "Создания внешнего вида и структуры главной страницы сайта",
     text: "nnnnnnnnn"
   };
+
+  _projectsMin = [
+    {
+      id: "0",
+      name: "projectManager"
+    },
+    {
+      id: "1",
+      name: "Сайт web студии"
+    }
+  ];
   getAllProjects = async () => {
     return this._pojects;
+  };
+  getAllProjectsMin = async () => {
+    return this._projectsMin;
   };
   getProject = async (id?: string) => {
     if (!id) {
