@@ -5,6 +5,7 @@
   background: #fff;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   padding: 5px 25px 15px;
+  position: relative;
 }
 .task__title {
   border-bottom: 1px solid #f3f3f3;

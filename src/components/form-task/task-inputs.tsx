@@ -18,7 +18,7 @@ interface ISelectData {
   name: string;
 }
 
-const GroupInputs = (props: ICategoryInputsProps) => {
+const TaskInputs = (props: ICategoryInputsProps) => {
   const [projectc, setProjectc] = useState([{ id: "", name: "Загрузка данных" }]);
 
   const [category, setCategory] = useState([{ id: "", name: "Загрузка данных" }]);
@@ -88,4 +88,4 @@ const GroupInputs = (props: ICategoryInputsProps) => {
   );
 };
 
-export default GroupInputs;
+export default TaskInputs;

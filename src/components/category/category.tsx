@@ -18,15 +18,12 @@ interface ICategoryState {
         id?: string;
         description?: string;
         title?: string;
-      }
+      },
     ];
   };
 }
 
-export default class Category extends Component<
-  ICategoryProps,
-  ICategoryState
-> {
+export default class Category extends Component<ICategoryProps, ICategoryState> {
   constructor(props: ICategoryProps) {
     super(props);
     this.state = {
@@ -34,8 +31,8 @@ export default class Category extends Component<
         id: "",
         title: "",
         description: "",
-        groups: [{}]
-      }
+        groups: [{}],
+      },
     };
   }
   //Запрос на сервер
@@ -43,7 +40,7 @@ export default class Category extends Component<
   componentDidMount() {
     this.apiService.getCategory(this.props.categoryId).then((res: any) => {
       this.setState({
-        category: res
+        category: res,
       });
     });
   }
@@ -54,14 +51,7 @@ export default class Category extends Component<
       if (el.id === "main") {
         return "";
       }
-      return (
-        <Card
-          key={i++}
-          id={el.id}
-          title={el.title}
-          description={el.description}
-        />
-      );
+      return <Card key={i++} id={el.id} status="unknown" title={el.title} description={el.description} />;
     });
   }
 
@@ -70,11 +60,7 @@ export default class Category extends Component<
     const { category } = this.state;
     return (
       <div>
-        <Header
-          text={category.title}
-          icon="shapes"
-          description={category.description}
-        />
+        <Header text={category.title} icon="shapes" description={category.description} />
         <div className="flex-wrapper">{items}</div>
         <Header text="Задачи основной группы" icon="albums" size="middle" />
         <Group type="without_header" />

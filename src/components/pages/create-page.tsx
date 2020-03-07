@@ -4,6 +4,7 @@ import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
 import FormProject from "../form-project";
 import FormCategory from "../form-category";
 import FormGroup from "../form-group";
+import FormTask from "../form-task";
 
 const CreatePage = () => {
   const match = useRouteMatch();
@@ -36,7 +37,7 @@ const CreatePage = () => {
           <FormGroup />
         </Route>
         <Route path={`${match.url}/task`}>
-          <h2>Создание задачи</h2>
+          <FormTask />
         </Route>
       </Switch>
     </>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import "./task.css";
 import ApiService from "../../services/api-service";
+import Status from "../status";
 
 interface ITaskProps {
   taskId?: string;
@@ -22,7 +23,7 @@ export default class Task extends Component<ITaskProps, ITaskState> {
     this.state = {
       title: "Заголовок",
       description: "описание",
-      text: "текст"
+      text: "текст",
     };
   }
 
@@ -33,7 +34,7 @@ export default class Task extends Component<ITaskProps, ITaskState> {
       this.setState({
         title: res.title,
         description: res.description,
-        text: res.text
+        text: res.text,
       });
     });
   }
@@ -43,6 +44,7 @@ export default class Task extends Component<ITaskProps, ITaskState> {
       <div>
         {" "}
         <div className="task">
+          <Status status="completed" />
           <h1 className="task__title">{this.state.title}</h1>
           <p className="task__description">{this.state.description}</p>
           <div className="task__text">{this.state.text}</div>

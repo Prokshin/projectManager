@@ -18,7 +18,7 @@ interface IGroupState {
         id?: string;
         title?: string;
         description?: string;
-      }
+      },
     ];
   };
 }
@@ -27,7 +27,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
   constructor(props: IGroupProps) {
     super(props);
     this.state = {
-      group: { tasks: [{}] }
+      group: { tasks: [{}] },
     };
   }
   apiService = new ApiService();
@@ -35,7 +35,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
   componentDidMount() {
     this.apiService.getGroup(this.props.groupId).then((res: any) => {
       this.setState({
-        group: res
+        group: res,
       });
     });
   }
@@ -50,9 +50,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
       if (this.props.type === "without_header") {
         id = `main/${el.id}`;
       }
-      return (
-        <Card key={i++} id={id} title={el.title} description={el.description} />
-      );
+      return <Card key={i++} id={id} title={el.title} description={el.description} status="unknown" />;
     });
   }
 
@@ -60,13 +58,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
     if (this.props.type === "without_header") {
       return "";
     } else {
-      return (
-        <Header
-          text={this.state.group.title}
-          icon="albums"
-          description={this.state.group.description}
-        />
-      );
+      return <Header text={this.state.group.title} icon="albums" description={this.state.group.description} />;
     }
   }
 

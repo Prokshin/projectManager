@@ -1,0 +1,19 @@
+.status {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-weight: 700;
+  font-size: 10px;
+}
+.status_available {
+  color: #668fa9;
+}
+.status_not_available {
+  color: red;
+}
+.status_complated {
+  color: green;
+}
+.status_performed {
+  color: yellow;
+}
