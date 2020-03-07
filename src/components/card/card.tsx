@@ -3,9 +3,8 @@ import "./card.css";
 import { Link, useRouteMatch } from "react-router-dom";
 import Status from "../status";
 
-//!Добавить статусы, тип; для задач - проект > категорию, deadline.
-
-export interface CardProps {
+//Добавить deadline
+interface CardProps {
   id: string | undefined;
   title: string | undefined;
   description: string | undefined;

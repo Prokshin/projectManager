@@ -11,16 +11,37 @@ const Status = (props: IStatusProps) => {
   let el = <span></span>;
   switch (status) {
     case "available":
-      el = <span className="status_available">Доступно</span>;
+      el = (
+        <span className="status_available">
+          <ion-icon name="ellipse" />
+          Доступно
+        </span>
+      );
       break;
     case "completed":
-      el = <span className="status_complated">Завершено</span>;
+      el = (
+        <span className="status_complated">
+          <ion-icon name="checkmark" />
+          Завершено
+        </span>
+      );
       break;
     case "performed":
-      el = <span className="status_performed">Выполняется</span>;
+      el = (
+        <span className="status_performed">
+          {" "}
+          <ion-icon name="sync" />
+          Выполняется
+        </span>
+      );
       break;
     case "not_available":
-      el = <span className="status_not-available">Недоступно</span>;
+      el = (
+        <span className="status_not-available">
+          <ion-icon name="close" />
+          Недоступно
+        </span>
+      );
       break;
     default:
       break;

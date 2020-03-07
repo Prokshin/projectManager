@@ -9,10 +9,10 @@ interface ITaskProps {
 }
 
 interface ITaskState {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
   description?: string;
-  text?: string;
+  text: string;
   creator?: string;
   deadline?: Date;
 }
@@ -21,9 +21,10 @@ export default class Task extends Component<ITaskProps, ITaskState> {
   constructor(props: ITaskProps) {
     super(props);
     this.state = {
-      title: "Заголовок",
-      description: "описание",
-      text: "текст",
+      id: "",
+      title: "",
+      description: "",
+      text: "",
     };
   }
 
@@ -44,7 +45,7 @@ export default class Task extends Component<ITaskProps, ITaskState> {
       <div>
         {" "}
         <div className="task">
-          <Status status="completed" />
+          <Status status="not_available" />
           <h1 className="task__title">{this.state.title}</h1>
           <p className="task__description">{this.state.description}</p>
           <div className="task__text">{this.state.text}</div>
