@@ -4,6 +4,11 @@ import Card from "../card";
 import Header from "../header";
 import Group from "../group/group";
 
+type Groups = {
+  id: string;
+  description?: string;
+  title: string;
+};
 interface ICategoryProps {
   categoryId?: string;
 }
@@ -13,13 +18,7 @@ interface ICategoryState {
     title: string;
     description?: string;
     creator?: string;
-    groups: [
-      {
-        id?: string;
-        description?: string;
-        title?: string;
-      },
-    ];
+    groups: Groups[];
   };
 }
 
@@ -31,7 +30,13 @@ export default class Category extends Component<ICategoryProps, ICategoryState> 
         id: "",
         title: "",
         description: "",
-        groups: [{}],
+        groups: [
+          {
+            id: "",
+            title: "",
+            description: "",
+          },
+        ],
       },
     };
   }

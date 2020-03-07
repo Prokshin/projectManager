@@ -2,27 +2,32 @@ import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
 
+type projects = {
+  id: string;
+  title: string;
+  description: string;
+};
 interface IProjectsState {
-  projects: [
-    {
-      id?: string;
-      title?: string;
-      description?: string;
-    }
-  ];
+  projects: projects[];
 }
 
 export default class Projects extends Component<{}, IProjectsState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      projects: [{}]
+      projects: [
+        {
+          id: "",
+          title: "",
+          description: "",
+        },
+      ],
     };
   }
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService.getAllProjects().then((res: any) => {
+    this.apiService.getAllProjects().then((res: projects[] | any) => {
       this.setState({ projects: res });
     });
   }
@@ -32,14 +37,7 @@ export default class Projects extends Component<{}, IProjectsState> {
       if (el.id === undefined) {
         return <span key="loading">Загрузка данных</span>;
       }
-      return (
-        <Card
-          key={el.id}
-          id={el.id}
-          title={el.title}
-          description={el.description}
-        />
-      );
+      return <Card key={el.id} id={el.id} title={el.title} description={el.description} />;
     });
   }
   render() {

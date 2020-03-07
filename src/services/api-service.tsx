@@ -10,24 +10,24 @@ export default class ApiService {
         {
           id: "0_0",
           title: "Дизайн",
-          description: "gg"
+          description: "gg",
         },
         {
           id: "0_1",
           title: "Frontend",
-          description: "gg"
+          description: "gg",
         },
         {
           id: "0_2",
           title: "Backend",
-          description: "gg"
+          description: "gg",
         },
         {
           id: "0_3",
           title: "SMM",
-          description: "gg"
-        }
-      ]
+          description: "gg",
+        },
+      ],
     },
     {
       id: 1,
@@ -37,111 +37,109 @@ export default class ApiService {
         {
           id: "1_0",
           title: "Дизайн",
-          description: "gg"
+          description: "gg",
         },
         {
           id: "1_1",
           title: "Верстка",
-          description: "gg"
+          description: "gg",
         },
         {
           id: "1_2",
           title: "Backend",
-          description: "gg"
+          description: "gg",
         },
         {
           id: "1_3",
           title: "Базы данных",
-          description: "gg"
-        }
-      ]
-    }
+          description: "gg",
+        },
+      ],
+    },
   ];
 
   _category = {
     id: "01",
     title: "Дизайн",
-    description:
-      "Очень длинное описание категории, в которой будет разрабатываться внешний вид инетерфейсв приложения",
+    description: "Очень длинное описание категории, в которой будет разрабатываться внешний вид инетерфейсв приложения",
     groups: [
       {
         id: "main",
-        title: "основная категория"
+        title: "основная категория",
       },
       {
         id: "001",
         title: "UI",
-        description: "описание UI"
+        description: "описание UI",
       },
       {
         id: "002",
         title: "Рекламные банеры",
-        description: "описание UI"
+        description: "описание UI",
       },
       {
         id: "003",
         title: "Айдентика",
-        description: "описание UI"
-      }
-    ]
+        description: "описание UI",
+      },
+    ],
   };
 
   _group = {
     id: "001",
     title: "UI",
-    description:
-      "Дизайн пользовательского интерфейса приложения. Используется adobe xd.",
+    description: "Дизайн пользовательского интерфейса приложения. Используется adobe xd.",
     tasks: [
       {
         id: "0001",
         title: "Заголовок 1 задачи",
-        description: "Описание 1 задачи"
+        description: "Описание 1 задачи",
       },
       {
         id: "0002",
         title: "Заголовок 2 задачи",
-        description: "Описание 3 задачи"
+        description: "Описание 3 задачи",
       },
       {
         id: "0003",
         title: "Заголовок 3 задачи",
-        description: "Описание 3 задачи"
+        description: "Описание 3 задачи",
       },
       {
         id: "0004",
         title: "Заголовок 4 задачи",
-        description: "Описание 4 задачи"
-      }
-    ]
+        description: "Описание 4 задачи",
+      },
+    ],
   };
 
   _task = {
     id: "00000",
     title: "Дизайн главной страницы",
     description: "Создания внешнего вида и структуры главной страницы сайта",
-    text: "nnnnnnnnn"
+    text: "nnnnnnnnn",
   };
 
   _projectsMin = [
     {
       id: "0",
-      name: "projectManager"
+      name: "projectManager",
     },
     {
       id: "1",
-      name: "Сайт web студии"
-    }
+      name: "Сайт web студии",
+    },
   ];
 
   _categoryMin = [
     {
       id: "0_0",
-      name: "Дизайн"
+      name: "Дизайн",
     },
     {
       id: "0_1",
-      name: "Frontend"
-    }
+      name: "Frontend",
+    },
   ];
 
   getAllProjects = async () => {
