@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
 
-type projects = {
+type project = {
   id: string;
   title: string;
   description: string;
 };
 interface IProjectsState {
-  projects: projects[];
+  projects: project[];
 }
 
 export default class Projects extends Component<{}, IProjectsState> {
@@ -27,21 +27,22 @@ export default class Projects extends Component<{}, IProjectsState> {
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService.getAllProjects().then((res: projects[] | any) => {
+    this.apiService.getAllProjects().then((res: project[] | any) => {
       this.setState({ projects: res });
     });
   }
-  //Создание массива карточек проектов
-  renderItems() {
-    return this.state.projects.map(el => {
-      if (el.id === undefined) {
-        return <span key="loading">Загрузка данных</span>;
-      }
-      return <Card key={el.id} id={el.id} title={el.title} description={el.description} />;
-    });
-  }
+
   render() {
-    const items = this.renderItems();
-    return <div className="flex-wrapper">{items}</div>;
+    const { projects } = this.state;
+    if (projects.length === 0) {
+      return <p>gg</p>;
+    }
+    return (
+      <div className="flex-wrapper">
+        {projects.map((el: project) => {
+          return <Card key={el.id} id={el.id} title={el.title} description={el.description} />;
+        })}
+      </div>
+    );
   }
 }

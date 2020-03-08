@@ -4,83 +4,62 @@ import Card from "../card";
 import Header from "../header";
 
 interface IProjectProps {
-  projectId?: string;
+  projectId: string | undefined;
 }
 
 interface IProjectState {
-  project: {
-    id: string;
-    title: string;
-    description?: string;
-    creator?: string;
-    category: [
-      {
-        id?: string;
-        description?: string;
-        title?: string;
-      }
-    ];
-  };
+  id: string;
+  title: string;
+  description?: string;
+  creator?: string;
+  category: [
+    {
+      id: string;
+      description: string;
+      title: string;
+    },
+  ];
 }
+
+const initialState: IProjectState = {
+  id: "",
+  title: "",
+  description: "",
+  creator: "",
+  category: [
+    {
+      id: "",
+      description: "",
+      title: "Загрузка данных",
+    },
+  ],
+};
 
 export default class Project extends Component<IProjectProps, IProjectState> {
   constructor(props: IProjectProps) {
     super(props);
-    this.state = {
-      project: {
-        id: "",
-        title: "",
-        description: "",
-        creator: "",
-        category: [{}]
-      }
-    };
+    this.state = initialState;
   }
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    console.log(this.props.projectId);
-    if (!this.props.projectId) {
-      return 0;
-    }
-    this.apiService.getProject(this.props.projectId).then((res: any) => {
-      this.setState({
-        project: res
+    if (this.props.projectId) {
+      this.apiService.getProject(this.props.projectId).then((res: IProjectState | any) => {
+        this.setState(res);
       });
-    });
-  }
-  //Создание массива карточек категорий
-  renderItems() {
-    let i = 0;
-    return this.state.project.category.map(el => {
-      return (
-        <Card
-          key={i++}
-          id={el.id}
-          title={el.title}
-          description={el.description}
-        />
-      );
-    });
+    }
   }
 
   render() {
-    const items = this.renderItems();
-    const { project } = this.state;
+    const { title, description, category } = this.state;
     return (
       <div>
-        {/* <Bredcrumbs
-          links={[
-            { url: "/projects", name: "Проекты" },
-            { url: `${match.url}`, name: `${project.title}` }
-          ]}
-        /> */}
-        <Header
-          text={project.title}
-          icon="folder"
-          description={project.description}
-        />
-        <div className="flex-wrapper">{items}</div>
+        <Header text={title} icon="folder" description={description} />
+        <div className="flex-wrapper">
+          {category.map((el, index) => {
+            return <Card key={index} id={el.id} title={el.title} description={el.description} />;
+          })}
+        </div>
       </div>
     );
   }

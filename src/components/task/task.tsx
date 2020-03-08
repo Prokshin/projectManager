@@ -43,9 +43,8 @@ export default class Task extends Component<ITaskProps, ITaskState> {
     console.log(this.props.taskId);
     return (
       <div>
-        {" "}
         <div className="task">
-          <Status status="not_available" />
+          <Status status="available" />
           <h1 className="task__title">{this.state.title}</h1>
           <p className="task__description">{this.state.description}</p>
           <div className="task__text">{this.state.text}</div>

@@ -8,30 +8,43 @@ interface IGroupProps {
   groupId?: string;
 }
 
+type task = {
+  id: string;
+  title: string;
+  description: string;
+};
+
 interface IGroupState {
   group: {
-    id?: string;
-    title?: string;
-    description?: string;
-    tasks: [
-      {
-        id?: string;
-        title?: string;
-        description?: string;
-      },
-    ];
+    id: string;
+    title: string;
+    description: string;
+    tasks: task[];
   };
 }
+
+const initialState: IGroupState = {
+  group: {
+    id: "",
+    title: "",
+    description: "",
+    tasks: [
+      {
+        id: "",
+        title: "",
+        description: "",
+      },
+    ],
+  },
+};
 
 export default class Group extends Component<IGroupProps, IGroupState> {
   constructor(props: IGroupProps) {
     super(props);
-    this.state = {
-      group: { tasks: [{}] },
-    };
+    this.state = initialState;
   }
-  apiService = new ApiService();
 
+  apiService = new ApiService();
   componentDidMount() {
     this.apiService.getGroup(this.props.groupId).then((res: any) => {
       this.setState({
@@ -41,8 +54,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
   }
 
   renderItems() {
-    let i = 0;
-    return this.state.group.tasks.map(el => {
+    return this.state.group.tasks.map((el, index) => {
       if (el.id === "main") {
         return "";
       }
@@ -50,7 +62,7 @@ export default class Group extends Component<IGroupProps, IGroupState> {
       if (this.props.type === "without_header") {
         id = `main/${el.id}`;
       }
-      return <Card key={i++} id={id} title={el.title} description={el.description} status="unknown" />;
+      return <Card key={index} id={id} title={el.title} description={el.description} status="unknown" />;
     });
   }
 

@@ -144,7 +144,7 @@ export default class ApiService {
 
   _userMin = {
     id: "00",
-    username: "Иванов Иван",
+    name: "Иванов Иван",
     email: "ivanov.ivan@mail.ey",
   };
   getAllProjects = async () => {

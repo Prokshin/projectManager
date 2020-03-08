@@ -1,6 +1,6 @@
 export interface IState {
-  auth: {
-    username: string;
+  user: {
+    name: string;
     id: string;
     email: string;
   };
@@ -15,8 +15,8 @@ export interface IReduxBaseAction {
 }
 
 export const initialState: IState = {
-  auth: {
-    username: "",
+  user: {
+    name: "",
     id: "",
     email: "",
   },
@@ -25,7 +25,7 @@ export const initialState: IState = {
 export function rootReducer(state: IState = initialState, action: IReduxBaseAction) {
   switch (action.type) {
     case "ADD_USER":
-      return { ...state, auth: action.payload };
+      return { ...state, user: action.payload };
     default:
       return state;
   }
