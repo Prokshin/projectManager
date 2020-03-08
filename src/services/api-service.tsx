@@ -142,6 +142,11 @@ export default class ApiService {
     },
   ];
 
+  _userMin = {
+    id: "00",
+    username: "Иванов Иван",
+    email: "ivanov.ivan@mail.ey",
+  };
   getAllProjects = async () => {
     return this._pojects;
   };
@@ -170,5 +175,8 @@ export default class ApiService {
   };
   getTask = async (id?: string) => {
     return this._task;
+  };
+  getUser = async (id?: string) => {
+    return this._userMin;
   };
 }
