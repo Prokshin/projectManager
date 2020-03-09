@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import ApiService from "../../services/api-service";
 
-interface ICategoryInputsProps {
+interface ITaskInputsProps {
   nameValue: string;
   HandleChangeName: (event: React.FormEvent<HTMLInputElement>) => void;
   descriptionValue: string;
@@ -11,6 +11,8 @@ interface ICategoryInputsProps {
   HandleChangeProject: (selected: React.FormEvent<HTMLSelectElement>) => void;
   categoryIdValue: string;
   HandleChangeCategory: (selected: React.FormEvent<HTMLSelectElement>) => void;
+  groupIdValue: string;
+  HandleChangeGroup: (selected: React.FormEvent<HTMLSelectElement>) => void;
 }
 
 interface ISelectData {
@@ -18,10 +20,14 @@ interface ISelectData {
   name: string;
 }
 
-const TaskInputs = (props: ICategoryInputsProps) => {
-  const [projectc, setProjectc] = useState([{ id: "", name: "Загрузка данных" }]);
+const TaskInputs = (props: ITaskInputsProps) => {
+  const [projectc, setProjectc] = useState([
+    { id: "", name: "Загрузка данных" },
+  ]);
 
-  const [category, setCategory] = useState([{ id: "", name: "Загрузка данных" }]);
+  const [category, setCategory] = useState([
+    { id: "", name: "Загрузка данных" },
+  ]);
 
   const apiService = new ApiService();
 
@@ -45,7 +51,11 @@ const TaskInputs = (props: ICategoryInputsProps) => {
   };
   return (
     <div className="form-project__inputs">
-      <select className="form-project__inputs__select" value={props.projectIdValue} onChange={handle}>
+      <select
+        className="form-project__inputs__select"
+        value={props.projectIdValue}
+        onChange={handle}
+      >
         <option value="" hidden>
           Выберите проект
         </option>
@@ -73,9 +83,29 @@ const TaskInputs = (props: ICategoryInputsProps) => {
           );
         })}
       </select>
+      <select
+        className="form-project__inputs__select"
+        value={props.categoryIdValue}
+        onChange={props.HandleChangeCategory}
+      >
+        <option value="" hidden>
+          Выберите группу
+        </option>
+        {category.map(data => {
+          return (
+            <option key={data.id} value={data.id}>
+              {data.name}
+            </option>
+          );
+        })}
+      </select>
       <div className="form-project__inputs__block">
         <p className="form-project__inputs__label">Название</p>
-        <input value={props.nameValue} onChange={props.HandleChangeName} className="form-project__inputs__input" />
+        <input
+          value={props.nameValue}
+          onChange={props.HandleChangeName}
+          className="form-project__inputs__input"
+        />
       </div>
 
       <p className="form-project__inputs__label">Описание</p>

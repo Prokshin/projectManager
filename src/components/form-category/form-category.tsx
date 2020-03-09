@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./form-category.css";
 
 import CategoryInputs from "./category-inputs";
+import { SelectProject } from "../form-select";
 
 interface IFromCategoryState {
   name: string;
@@ -16,7 +17,7 @@ export default class FormCategoty extends Component<{}, IFromCategoryState> {
     this.state = {
       name: "",
       description: "",
-      projectId: ""
+      projectId: "",
     };
   }
 
@@ -24,12 +25,12 @@ export default class FormCategoty extends Component<{}, IFromCategoryState> {
     this.setState({ name: event.currentTarget.value });
   };
   handleChangeDescription = (
-    event: React.FormEvent<HTMLInputElement>
+    event: React.FormEvent<HTMLInputElement>,
   ): void => {
     this.setState({ description: event.currentTarget.value });
   };
   handleChangeProject = (
-    selected: React.FormEvent<HTMLSelectElement>
+    selected: React.FormEvent<HTMLSelectElement>,
   ): void => {
     this.setState({ projectId: selected.currentTarget.value });
     console.log(selected.currentTarget.value);
@@ -54,14 +55,18 @@ export default class FormCategoty extends Component<{}, IFromCategoryState> {
               Создать категорию
             </button>
           </div>
-          <CategoryInputs
-            nameValue={this.state.name}
-            HandleChangeName={this.handleChangeName}
-            descriptionValue={this.state.description}
-            HandleChangeDescription={this.handleChangeDescription}
-            projectIdValue={this.state.projectId}
-            HandleChangeProject={this.handleChangeProject}
-          />
+          <div className="form-project__inputs">
+            <SelectProject
+              projectIdValue={this.state.projectId}
+              HandleChangeProject={this.handleChangeProject}
+            />
+            <CategoryInputs
+              nameValue={this.state.name}
+              HandleChangeName={this.handleChangeName}
+              descriptionValue={this.state.description}
+              HandleChangeDescription={this.handleChangeDescription}
+            />
+          </div>
         </div>
       </div>
     );

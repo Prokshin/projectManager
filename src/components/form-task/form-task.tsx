@@ -8,6 +8,7 @@ interface IFromTaskState {
   description: string;
   projectId: string;
   categoryId: string;
+  groupId: string;
 }
 
 export default class FormTask extends Component<{}, IFromTaskState> {
@@ -18,6 +19,7 @@ export default class FormTask extends Component<{}, IFromTaskState> {
       description: "",
       projectId: "",
       categoryId: "",
+      groupId: "",
     };
   }
 
@@ -33,6 +35,9 @@ export default class FormTask extends Component<{}, IFromTaskState> {
     console.log(selected.currentTarget.value);
   };
   handleChangeCategory = (selected: React.FormEvent<HTMLSelectElement>): void => {
+    this.setState({ categoryId: selected.currentTarget.value });
+  };
+  handleChangeGroup = (selected: React.FormEvent<HTMLSelectElement>): void => {
     this.setState({ categoryId: selected.currentTarget.value });
   };
   SendForm = () => {
@@ -64,6 +69,8 @@ export default class FormTask extends Component<{}, IFromTaskState> {
             HandleChangeProject={this.handleChangeProject}
             categoryIdValue={this.state.categoryId}
             HandleChangeCategory={this.handleChangeCategory}
+            groupIdValue={this.state.groupId}
+            HandleChangeGroup={this.handleChangeGroup}
           />
         </div>
       </div>

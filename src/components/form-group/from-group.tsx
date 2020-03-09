@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import "./form-group.css";
 import GroupInputs from "./group-inputs";
+import { SelectProject, SelectCategory } from "../form-select";
 
 interface IFromCategoryState {
   name: string;
@@ -10,41 +11,47 @@ interface IFromCategoryState {
   categoryId: string;
 }
 
+const initialState: IFromCategoryState = {
+  name: "",
+  description: "",
+  projectId: "",
+  categoryId: "",
+};
+
 export default class FormGroup extends Component<{}, IFromCategoryState> {
   constructor(props: never) {
     super(props);
-    this.state = {
-      name: "",
-      description: "",
-      projectId: "",
-      categoryId: ""
-    };
+    this.state = initialState;
   }
 
   handleChangeName = (event: React.FormEvent<HTMLInputElement>): void => {
     this.setState({ name: event.currentTarget.value });
   };
+
   handleChangeDescription = (
-    event: React.FormEvent<HTMLInputElement>
+    event: React.FormEvent<HTMLInputElement>,
   ): void => {
     this.setState({ description: event.currentTarget.value });
   };
-  handleChangeProject = (
-    selected: React.FormEvent<HTMLSelectElement>
-  ): void => {
-    this.setState({ projectId: selected.currentTarget.value, categoryId: "" });
 
-    console.log(selected.currentTarget.value);
+  handleChangeProject = (
+    selected: React.FormEvent<HTMLSelectElement>,
+  ): void => {
+    this.setState({ projectId: selected.currentTarget.value });
   };
+
   handleChangeCategory = (
-    selected: React.FormEvent<HTMLSelectElement>
+    selected: React.FormEvent<HTMLSelectElement>,
   ): void => {
     this.setState({ categoryId: selected.currentTarget.value });
   };
+
   SendForm = () => {
     console.log("Обработка отправки формы");
     console.log(this.state);
-    window.alert(`${this.state.name} ${this.state.description}`);
+    window.alert(
+      `Форма отправлена. Название: ${this.state.name}, Описание: ${this.state.description}`,
+    );
   };
   render() {
     return (
@@ -61,16 +68,23 @@ export default class FormGroup extends Component<{}, IFromCategoryState> {
               Создать Группу
             </button>
           </div>
-          <GroupInputs
-            nameValue={this.state.name}
-            HandleChangeName={this.handleChangeName}
-            descriptionValue={this.state.description}
-            HandleChangeDescription={this.handleChangeDescription}
-            projectIdValue={this.state.projectId}
-            HandleChangeProject={this.handleChangeProject}
-            categoryIdValue={this.state.categoryId}
-            HandleChangeCategory={this.handleChangeCategory}
-          />
+          <div className="form-project__inputs">
+            <SelectProject
+              projectIdValue={this.state.projectId}
+              HandleChangeProject={this.handleChangeProject}
+            />
+            <SelectCategory
+              projectIdValue={this.state.projectId}
+              categoryIdValue={this.state.categoryId}
+              HandleChangeCategory={this.handleChangeCategory}
+            />
+            <GroupInputs
+              nameValue={this.state.name}
+              HandleChangeName={this.handleChangeName}
+              descriptionValue={this.state.description}
+              HandleChangeDescription={this.handleChangeDescription}
+            />
+          </div>
         </div>
       </div>
     );

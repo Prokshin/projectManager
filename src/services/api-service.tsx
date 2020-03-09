@@ -142,6 +142,17 @@ export default class ApiService {
     },
   ];
 
+  _groupMin = [
+    {
+      id: "0_0",
+      name: "UI",
+    },
+    {
+      id: "0_1",
+      name: "Айдентика",
+    },
+  ];
+
   _userMin = {
     id: "00",
     name: "Иванов Иван",
@@ -172,6 +183,9 @@ export default class ApiService {
   };
   getGroup = async (id?: string) => {
     return this._group;
+  };
+  getGroupMin = async (id?: string) => {
+    return this._groupMin;
   };
   getTask = async (id?: string) => {
     return this._task;
