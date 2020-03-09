@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ApiService from "../../services/api-service";
+import ApiService from "../../../services/api-service";
 
 interface ISelectProjectProps {
   projectIdValue: string;
@@ -13,16 +13,12 @@ interface ICategory {
 }
 
 const SelectCategory = (props: ISelectProjectProps) => {
-  const [categories, setCategory] = useState([
-    { id: "", name: "Выберите категорию" },
-  ]);
+  const [categories, setCategory] = useState([{ id: "", name: "" }]);
 
   useEffect((): void => {
     const LoadData = async () => {
       const apiService = new ApiService();
-      const res: ICategory[] = await apiService.getCategoriesMin(
-        props.projectIdValue,
-      );
+      const res: ICategory[] = await apiService.getCategoriesMin(props.projectIdValue);
       setCategory(res);
     };
     LoadData();

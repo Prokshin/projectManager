@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addUser } from "../../actions";
-import { IState } from "../../reducers";
+import { IStore } from "../../reducers";
 import ApiService from "../../services/api-service";
 interface NavigationUserProps {
   userName: string;
@@ -31,7 +31,9 @@ const NavigationUser = (props: NavigationUserProps) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: (arg0: { type: string; payload: any }) => void) => {
+const mapDispatchToProps = (
+  dispatch: (arg0: { type: string; payload: any }) => void,
+) => {
   return {
     addUser: (user: any) => {
       dispatch(addUser(user));
@@ -39,8 +41,12 @@ const mapDispatchToProps = (dispatch: (arg0: { type: string; payload: any }) => 
   };
 };
 
-const mapStateToProps = (state: IState) => {
-  return { userName: state.user.name, id: state.user.id, email: state.user.email };
+const mapStateToProps = (state: IStore) => {
+  return {
+    userName: state.user.name,
+    id: state.user.id,
+    email: state.user.email,
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationUser);

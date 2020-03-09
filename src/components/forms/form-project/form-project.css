@@ -40,4 +40,9 @@
 
 .form-project__inputs__select {
   margin-right: 10px;
+  background-color: #fff;
+}
+.form-project__inputs__select option {
+  margin-right: 10px;
+  background-color: #fff;
 }

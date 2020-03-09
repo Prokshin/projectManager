@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "../header";
 import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
-import FormProject from "../form-project";
-import FormCategory from "../form-category";
-import FormGroup from "../form-group";
-import FormTask from "../form-task";
+import FormProject from "../forms/form-project";
+import FormCategory from "../forms/form-category";
+import FormGroup from "../forms/form-group";
+import FormTask from "../forms/form-task";
 
 const CreatePage = () => {
   const match = useRouteMatch();

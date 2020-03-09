@@ -1,4 +1,4 @@
-export interface IState {
+export interface IStore {
   user: {
     name: string;
     id: string;
@@ -14,7 +14,7 @@ export interface IReduxBaseAction {
   type: EReduxActionTypes;
 }
 
-export const initialState: IState = {
+export const initialState: IStore = {
   user: {
     name: "",
     id: "",
@@ -22,11 +22,14 @@ export const initialState: IState = {
   },
 };
 
-export function rootReducer(state: IState = initialState, action: IReduxBaseAction) {
+export function rootReducer(
+  store: IStore = initialState,
+  action: IReduxBaseAction,
+) {
   switch (action.type) {
     case "ADD_USER":
-      return { ...state, user: action.payload };
+      return { ...store, user: action.payload };
     default:
-      return state;
+      return store;
   }
 }

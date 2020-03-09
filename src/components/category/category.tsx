@@ -33,7 +33,10 @@ const initialState: ICategoryState = {
   ],
 };
 
-export default class Category extends Component<ICategoryProps, ICategoryState> {
+export default class Category extends Component<
+  ICategoryProps,
+  ICategoryState
+> {
   constructor(props: ICategoryProps) {
     super(props);
     this.state = initialState;
@@ -41,9 +44,11 @@ export default class Category extends Component<ICategoryProps, ICategoryState> 
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService.getCategory(this.props.categoryId).then((res: ICategoryState | any) => {
-      this.setState(res);
-    });
+    this.apiService
+      .getCategory(this.props.categoryId)
+      .then((res: ICategoryState | any) => {
+        this.setState(res);
+      });
   }
   //Создание массива карточек групп
   renderItems() {
@@ -51,7 +56,15 @@ export default class Category extends Component<ICategoryProps, ICategoryState> 
       if (el.id === "main") {
         return "";
       }
-      return <Card key={index} id={el.id} status="unknown" title={el.title} description={el.description} />;
+      return (
+        <Card
+          key={index}
+          id={el.id}
+          status="unknown"
+          title={el.title}
+          description={el.description}
+        />
+      );
     });
   }
 

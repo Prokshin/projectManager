@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ApiService from "../../services/api-service";
+import ApiService from "../../../services/api-service";
 
 interface ISelectProjectProps {
   projectIdValue: string;
@@ -12,9 +12,7 @@ interface IProjects {
 }
 
 const SelectProject = (props: ISelectProjectProps) => {
-  const [projects, setProjects] = useState([
-    { id: "", name: "Загрузка данных" },
-  ]);
+  const [projects, setProjects] = useState([{ id: "", name: "Загрузка данных" }]);
 
   const apiService = new ApiService();
   const LoadData = async () => {

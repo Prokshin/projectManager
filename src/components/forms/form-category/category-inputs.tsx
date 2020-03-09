@@ -10,21 +10,23 @@ interface ICategoryInputsProps {
 }
 
 const CategoryInputs = (props: ICategoryInputsProps) => {
+  const { nameValue, descriptionValue } = props;
+  const { HandleChangeName, HandleChangeDescription } = props;
   return (
     <>
       <div className="form-project__inputs__block">
         <p className="form-project__inputs__label">Название</p>
         <input
-          value={props.nameValue}
-          onChange={props.HandleChangeName}
+          value={nameValue}
+          onChange={HandleChangeName}
           className="form-project__inputs__input"
         />
       </div>
       <div className="form-project__inputs__block">
         <p className="form-project__inputs__label">Описание</p>
         <input
-          value={props.descriptionValue}
-          onChange={props.HandleChangeDescription}
+          value={descriptionValue}
+          onChange={HandleChangeDescription}
           className="form-project__inputs__input"
         />
       </div>

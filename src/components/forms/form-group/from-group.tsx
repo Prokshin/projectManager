@@ -54,6 +54,7 @@ export default class FormGroup extends Component<{}, IFromCategoryState> {
     );
   };
   render() {
+    const { name, description, projectId, categoryId } = this.state;
     return (
       <div className="wrap">
         <div className="form-project">
@@ -70,18 +71,18 @@ export default class FormGroup extends Component<{}, IFromCategoryState> {
           </div>
           <div className="form-project__inputs">
             <SelectProject
-              projectIdValue={this.state.projectId}
+              projectIdValue={projectId}
               HandleChangeProject={this.handleChangeProject}
             />
             <SelectCategory
-              projectIdValue={this.state.projectId}
-              categoryIdValue={this.state.categoryId}
+              projectIdValue={projectId}
+              categoryIdValue={categoryId}
               HandleChangeCategory={this.handleChangeCategory}
             />
             <GroupInputs
-              nameValue={this.state.name}
+              nameValue={name}
+              descriptionValue={description}
               HandleChangeName={this.handleChangeName}
-              descriptionValue={this.state.description}
               HandleChangeDescription={this.handleChangeDescription}
             />
           </div>

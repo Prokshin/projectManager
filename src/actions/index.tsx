@@ -1,6 +1,6 @@
-import { IState } from "../reducers";
+import { IStore } from "../reducers";
 
-export function addUser(user: IState) {
+export function addUser(user: IStore) {
   return {
     type: "ADD_USER",
     payload: user,
