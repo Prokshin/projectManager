@@ -5,7 +5,7 @@ import Header from "../header";
 
 interface IGroupProps {
   type?: string;
-  groupId?: string;
+  groupId: string | undefined;
 }
 
 type task = {
@@ -62,7 +62,9 @@ export default class Group extends Component<IGroupProps, IGroupState> {
       if (this.props.type === "without_header") {
         id = `main/${el.id}`;
       }
-      return <Card key={index} id={id} title={el.title} description={el.description} status="unknown" />;
+      return (
+        <Card key={index} id={id} title={el.title} description={el.description} status="unknown" />
+      );
     });
   }
 
@@ -70,7 +72,13 @@ export default class Group extends Component<IGroupProps, IGroupState> {
     if (this.props.type === "without_header") {
       return "";
     } else {
-      return <Header text={this.state.group.title} icon="albums" description={this.state.group.description} />;
+      return (
+        <Header
+          text={this.state.group.title}
+          icon="albums"
+          description={this.state.group.description}
+        />
+      );
     }
   }
 

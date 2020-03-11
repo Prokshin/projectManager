@@ -6,7 +6,6 @@ import CategoryPage from "./category-page";
 const ProjectPage = () => {
   const match = useRouteMatch();
   const { projectId } = useParams();
-
   return (
     <div>
       <Switch>

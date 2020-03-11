@@ -1,25 +1,21 @@
 import React, { Component } from "react";
-
 import "./task.css";
 import ApiService from "../../services/api-service";
-import Status from "../status";
-import { status } from "../status/status";
+import { statusType } from "../status/status";
 import Comment from "../comment";
 import { comment } from "../comment/comment";
 import TaskCard from "./task-card";
+
 interface ITaskProps {
   taskId?: string;
 }
 
-// type comment = {
-
-// }
 interface ITaskState {
   id: string;
   title: string;
   description?: string;
   text: string;
-  status: status;
+  status: statusType;
   creator?: string;
   deadline?: Date;
   comments?: comment[];
@@ -33,11 +29,11 @@ const initionalState: ITaskState = {
   status: "unknown",
   comments: [
     {
-      text: "string",
-      author: "string",
+      text: "",
+      author: "",
       link: {
-        url: "string",
-        text: "string",
+        url: "",
+        text: "",
       },
     },
   ],
@@ -53,7 +49,6 @@ export default class Task extends Component<ITaskProps, ITaskState> {
 
   componentDidMount() {
     this.apiService.getTask(this.props.taskId).then((res: any) => {
-      console.log(res);
       this.setState({
         title: res.title,
         description: res.description,
@@ -73,7 +68,13 @@ export default class Task extends Component<ITaskProps, ITaskState> {
     const { title, description, text } = this.state;
     return (
       <div>
-        <TaskCard title={title} text={text} description={description} />
+        <TaskCard
+          title={title}
+          text={text}
+          description={description}
+          status={this.state.status}
+          handleClick={this.handleClick}
+        />
         <Comment taskId={this.props.taskId} comments={this.state.comments} />
       </div>
     );

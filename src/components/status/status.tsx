@@ -2,7 +2,7 @@ import React from "react";
 
 import "./status.css";
 
-export type status =
+export type statusType =
   | "completed"
   | "performed"
   | "available"
@@ -11,7 +11,7 @@ export type status =
   | "unknown";
 
 interface IStatusProps {
-  status: status;
+  status: statusType;
 }
 
 const Status = (props: IStatusProps) => {

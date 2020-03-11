@@ -33,10 +33,7 @@ const initialState: ICategoryState = {
   ],
 };
 
-export default class Category extends Component<
-  ICategoryProps,
-  ICategoryState
-> {
+export default class Category extends Component<ICategoryProps, ICategoryState> {
   constructor(props: ICategoryProps) {
     super(props);
     this.state = initialState;
@@ -44,11 +41,9 @@ export default class Category extends Component<
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService
-      .getCategory(this.props.categoryId)
-      .then((res: ICategoryState | any) => {
-        this.setState(res);
-      });
+    this.apiService.getCategory(this.props.categoryId).then((res: ICategoryState | any) => {
+      this.setState(res);
+    });
   }
   //Создание массива карточек групп
   renderItems() {
@@ -76,7 +71,8 @@ export default class Category extends Component<
         <Header text={title} icon="shapes" description={description} />
         <div className="flex-wrapper">{items}</div>
         <Header text="Задачи основной группы" icon="albums" size="middle" />
-        <Group type="without_header" />
+        //!Костыль с groupId
+        <Group type="without_header" groupId="main" />
       </div>
     );
   }

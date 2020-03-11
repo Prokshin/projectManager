@@ -17,18 +17,18 @@ interface ICommentProps {
 }
 
 const Comment = (props: ICommentProps) => {
-  let comm = [<p>Ни один комментарий ещё не добавленн</p>];
+  let commentsList = [<p>Ни один комментарий ещё не добавленн</p>];
   if (props.comments) {
-    comm = props.comments.map(com => {
+    commentsList = props.comments.map((comment, index) => {
       return (
-        <div className="comment">
+        <div key={index} className="comment">
           <div>
             <ion-icon name="person" />
-            {com.author}
+            {comment.author}
           </div>
-          {com.text}
-          <a className="comment__link" href={com.link?.url}>
-            {com.link?.text}
+          {comment.text}
+          <a className="comment__link" href={comment.link?.url}>
+            {comment.link?.text}
           </a>
         </div>
       );
@@ -37,7 +37,7 @@ const Comment = (props: ICommentProps) => {
   return (
     <div className="wrap">
       <h2>Комментарии</h2>
-      {comm}
+      {commentsList}
     </div>
   );
 };
