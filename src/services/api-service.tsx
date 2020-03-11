@@ -61,7 +61,8 @@ export default class ApiService {
   _category = {
     id: "01",
     title: "Дизайн",
-    description: "Очень длинное описание категории, в которой будет разрабатываться внешний вид инетерфейсв приложения",
+    description:
+      "Очень длинное описание категории, в которой будет разрабатываться внешний вид инетерфейсв приложения",
     groups: [
       {
         id: "main",
@@ -118,6 +119,41 @@ export default class ApiService {
     title: "Дизайн главной страницы",
     description: "Создания внешнего вида и структуры главной страницы сайта",
     text: "nnnnnnnnn",
+    status: "available",
+    comments: [
+      {
+        text: "текст",
+        author: "Иванов Иван",
+        link: {
+          url: "",
+          text: "Текст ссылки",
+        },
+      },
+      {
+        text: "текст",
+        author: "Иванов Иван",
+        link: {
+          url: "",
+          text: "Текст ссылки",
+        },
+      },
+      {
+        text: "текст 2",
+        author: "Иванов Иван",
+        link: {
+          url: "",
+          text: "Текст ссылки",
+        },
+      },
+      {
+        text: "текст 3",
+        author: "Иванов Иван",
+        link: {
+          url: "",
+          text: "Текст ссылки",
+        },
+      },
+    ],
   };
 
   _projectsMin = [

@@ -1,0 +1,14 @@
+.comment {
+  background-color: #fff;
+  margin: 20px 0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+.comment__link {
+  color: blue;
+  display: block;
+}
+.comment__link:hover {
+  text-decoration: underline;
+}

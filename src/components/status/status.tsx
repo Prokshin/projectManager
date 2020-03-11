@@ -2,8 +2,16 @@ import React from "react";
 
 import "./status.css";
 
+export type status =
+  | "completed"
+  | "performed"
+  | "available"
+  | "not_available"
+  | undefined
+  | "unknown";
+
 interface IStatusProps {
-  status: "completed" | "performed" | "available" | "not_available" | undefined | "unknown";
+  status: status;
 }
 
 const Status = (props: IStatusProps) => {

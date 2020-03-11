@@ -30,12 +30,12 @@ const SelectCategory = (props: ISelectProjectProps) => {
       onChange={props.HandleChangeCategory}
     >
       <option value="" hidden>
-        Выберите категорию
+        Выберите категорию a
       </option>
-      {categories.map(data => {
+      {categories.map(category => {
         return (
-          <option key={data.id} value={data.id}>
-            {data.name}
+          <option key={category.id} value={category.id}>
+            {category.name}
           </option>
         );
       })}
