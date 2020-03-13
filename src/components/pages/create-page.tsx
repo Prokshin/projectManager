@@ -1,10 +1,11 @@
 import React from "react";
 import Header from "../header";
-import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 import FormProject from "../forms/form-project";
 import FormCategory from "../forms/form-category";
 import FormGroup from "../forms/form-group";
 import FormTask from "../forms/form-task";
+import CreateNav from "../create-nav";
 
 const CreatePage = () => {
   const match = useRouteMatch();
@@ -12,20 +13,7 @@ const CreatePage = () => {
   return (
     <>
       <Header text="Создать" icon="add-circle" />
-      <div className="wrap">
-        <Link className="button" to={`${match.url}`}>
-          Создать проект
-        </Link>
-        <Link className="button" to={`${match.url}/category`}>
-          Создать категорию
-        </Link>
-        <Link className="button" to={`${match.url}/group`}>
-          Создать группу
-        </Link>
-        <Link className="button" to={`${match.url}/task`}>
-          Создать задачу
-        </Link>
-      </div>
+      <CreateNav />
       <Switch>
         <Route exact path={`${match.url}`}>
           <FormProject />

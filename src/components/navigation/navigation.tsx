@@ -1,28 +1,14 @@
 import React from "react";
 import "./navigation.css";
-import { Link } from "react-router-dom";
 import NavigationUser from "./navigation-user";
+import NavigationItems from "./navigation-items";
 
 //!Реализовать раскрывающиеся пункты, с подгрузкой данных с сервера.
 const Navigation = () => {
   return (
     <nav className="menu">
-      <NavigationUser />
-      <div className="menu__item">
-        <Link to="/create">
-          <ion-icon name="add-circle"></ion-icon>Создать
-        </Link>
-      </div>
-      <div className="menu__item  ">
-        <Link to="/">
-          <ion-icon name="document"></ion-icon>Мои задачи
-        </Link>
-      </div>
-      <div className="menu__item">
-        <Link to="/projects">
-          <ion-icon name="folder"></ion-icon>Проекты
-        </Link>
-      </div>
+      <NavigationUser id="gg" userName="Иванов Иван" email="ivanov-super-star@mail.ru" />
+      <NavigationItems />
     </nav>
   );
 };

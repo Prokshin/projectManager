@@ -1,0 +1,18 @@
+.nav-button {
+  display: inline-block;
+  padding: 10px;
+  background-color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  font-weight: 700;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  transition: 0.2s all;
+  opacity: 1;
+  border: none;
+}
+.nav-button:hover {
+  opacity: 0.8;
+  transition: 0.2s all;
+}
