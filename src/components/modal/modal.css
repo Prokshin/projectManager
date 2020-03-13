@@ -1,0 +1,53 @@
+.modal {
+  position: fixed;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  display: block;
+  display: flex;
+  justify-content: center;
+  animation: show 0.5s;
+}
+.modal__content {
+  width: 70%;
+  margin: 50px 0;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-radius: 10px;
+  animation: slide 0.5s;
+  overflow: auto;
+}
+.hidden {
+  display: none;
+}
+.modal__close {
+  position: fixed;
+  width: 41px;
+  height: 41px;
+  top: 40px;
+  right: 20px;
+  color: #fff;
+  font-size: 45px;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    left: 0;
+  }
+}
+@keyframes slide {
+  from {
+    margin-left: -100%;
+  }
+  to {
+    margin-left: 0;
+  }
+}
