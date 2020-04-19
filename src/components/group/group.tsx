@@ -6,6 +6,8 @@ import Header from "../header";
 interface IGroupProps {
   type?: string;
   groupId: string | undefined;
+  categoryId: string | undefined;
+  projectId: string | undefined;
 }
 
 type task = {
@@ -46,26 +48,37 @@ export default class Group extends Component<IGroupProps, IGroupState> {
 
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService.getGroup(this.props.groupId).then((res: any) => {
-      this.setState({
-        group: res,
+    const { projectId, categoryId, groupId } = this.props;
+    if (groupId && categoryId && projectId) {
+      this.apiService.getGroup(projectId, categoryId, groupId).then((res: any) => {
+        this.setState({
+          group: res,
+        });
       });
-    });
+    }
   }
 
   renderItems() {
-    return this.state.group.tasks.map((el, index) => {
-      if (el.id === "main") {
-        return "";
-      }
-      let id = el.id;
-      if (this.props.type === "without_header") {
-        id = `main/${el.id}`;
-      }
-      return (
-        <Card key={index} id={id} title={el.title} description={el.description} status="unknown" />
-      );
-    });
+    if (this.state.group) {
+      return this.state.group.tasks.map((el, index) => {
+        if (el.id === "main") {
+          return "";
+        }
+        let id = el.id;
+        if (this.props.type === "without_header") {
+          id = `main/${el.id}`;
+        }
+        return (
+          <Card
+            key={index}
+            id={id}
+            title={el.title}
+            description={el.description}
+            status="unknown"
+          />
+        );
+      });
+    }
   }
 
   renderHeader() {

@@ -13,7 +13,7 @@ const ProjectPage = () => {
           <Project projectId={projectId} />
         </Route>
         <Route path={`${match.url}/:categoryId`}>
-          <CategoryPage />
+          <CategoryPage projectId={projectId} />
         </Route>
       </Switch>
     </div>

@@ -4,7 +4,10 @@ import "./comment.css";
 
 export type comment = {
   text?: string;
-  author?: string;
+  author?: {
+    email?: string;
+    id?: string;
+  };
   link?: {
     url?: string;
     text?: string;
@@ -24,7 +27,7 @@ const Comment = (props: ICommentProps) => {
         <div key={index} className="comment">
           <div>
             <ion-icon name="person" />
-            {comment.author}
+            {comment.author?.email}
           </div>
           {comment.text}
           <a className="comment__link" href={comment.link?.url}>

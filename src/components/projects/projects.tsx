@@ -27,8 +27,10 @@ export default class Projects extends Component<{}, IProjectsState> {
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService.getAllProjects().then((res: project[] | any) => {
-      this.setState({ projects: res });
+    this.apiService.getAllProjects().then((res: project[] | null) => {
+      if (res) {
+        this.setState({ projects: res });
+      } else console.error("Ошибка");
     });
   }
 

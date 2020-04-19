@@ -1,4 +1,83 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 export default class ApiService {
+  GetRequest = async (url: string) => {
+    return axios
+      .get(`http://127.0.0.1:8080/api/user/${Cookies.get("userId")}/project${url}`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("jwt")}`,
+        },
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((e) => console.error(e));
+  };
+
+  //*Получение всех проектов пользователя
+  getAllProjects = async () => {
+    const results = await this.GetRequest(``);
+    return results;
+  };
+
+  //*Получение данных преокта  и списка категорий по id проекта
+  getProject = async (projectId: string) => {
+    const result = await this.GetRequest(`/${projectId}`);
+    console.log(result);
+    return result;
+  };
+
+  //*Получение данных категории и списка групп по id категории
+  getCategory = async (categoryId: string, projectId: string) => {
+    const result = await this.GetRequest(`/${projectId}/category/${categoryId}`);
+    return result;
+  };
+
+  //*Получени данных группы и списка задач по id группы
+  getGroup = async (projectId: string, categoryId: string, groupId: string) => {
+    const result = await this.GetRequest(`/${projectId}/category/${categoryId}/group/${groupId}`);
+    return result;
+  };
+
+  getTask = async (id?: string) => {
+    const result = await this.GetRequest(`/1/category/1/group/1/task/1`);
+    return result;
+  };
+  getUser = async (id?: string) => {
+    return this._userMin;
+  };
+
+  getAllProjectsMin = async () => {
+    return this._projectsMin;
+  };
+  getCategoriesMin = async (id: string) => {
+    if (id === "") {
+      return [];
+    }
+    console.log(`Загрзка категорий проекта ${id}`);
+    return this._categoryMin;
+  };
+  getGroupMin = async (id?: string) => {
+    return this._groupMin;
+  };
+  // Registration = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:8080/api/user/login", {
+  //       method: "POST", // или 'PUT'
+  //       body: JSON.stringify({
+  //         email: "rail@mail.ru",
+  //         password: "123",
+  //       }), // данные могут быть 'строкой' или {объектом}!
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     const json = await response.json();
+  //     console.log("Успех:", JSON.stringify(json));
+  //   } catch (error) {
+  //     console.error("Ошибка:", error);
+  //   }
+  // };
   _pojects = [
     {
       id: 0,
@@ -193,40 +272,5 @@ export default class ApiService {
     id: "00",
     name: "Иванов Иван",
     email: "ivanov.ivan@mail.ey",
-  };
-  getAllProjects = async () => {
-    return this._pojects;
-  };
-  getAllProjectsMin = async () => {
-    return this._projectsMin;
-  };
-  getProject = async (id?: string) => {
-    if (!id) {
-      return [];
-    }
-    let id_num: number = parseInt(id);
-    return this._pojects[id_num];
-  };
-  getCategoriesMin = async (id: string) => {
-    if (id === "") {
-      return [];
-    }
-    console.log(`Загрзка категорий проекта ${id}`);
-    return this._categoryMin;
-  };
-  getCategory = async (id?: string) => {
-    return this._category;
-  };
-  getGroup = async (id?: string) => {
-    return this._group;
-  };
-  getGroupMin = async (id?: string) => {
-    return this._groupMin;
-  };
-  getTask = async (id?: string) => {
-    return this._task;
-  };
-  getUser = async (id?: string) => {
-    return this._userMin;
   };
 }

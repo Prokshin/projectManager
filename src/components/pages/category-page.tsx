@@ -3,7 +3,11 @@ import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
 import Category from "../category";
 import GroupPage from "./group-page";
 
-const CategoryPage = () => {
+interface ICategoryPageProps {
+  projectId: string | undefined;
+}
+
+const CategoryPage = ({ projectId }: ICategoryPageProps) => {
   const match = useRouteMatch();
   const { categoryId } = useParams();
 
@@ -11,10 +15,10 @@ const CategoryPage = () => {
     <div>
       <Switch>
         <Route exact path={match.url}>
-          <Category categoryId={categoryId} />
+          <Category projectId={projectId} categoryId={categoryId} />
         </Route>
         <Route path={`${match.url}/:groupId`}>
-          <GroupPage />
+          <GroupPage projectId={projectId} categoryId={categoryId} />
         </Route>
       </Switch>
     </div>

@@ -30,7 +30,10 @@ const initionalState: ITaskState = {
   comments: [
     {
       text: "",
-      author: "",
+      author: {
+        email: "",
+        id: "",
+      },
       link: {
         url: "",
         text: "",
@@ -52,7 +55,7 @@ export default class Task extends Component<ITaskProps, ITaskState> {
       this.setState({
         title: res.title,
         description: res.description,
-        text: res.text,
+        text: res.content,
         status: res.status,
         comments: res.comments,
       });

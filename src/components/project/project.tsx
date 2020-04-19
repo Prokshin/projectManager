@@ -12,7 +12,7 @@ interface IProjectState {
   title: string;
   description?: string;
   creator?: string;
-  category: [
+  categories: [
     {
       id: string;
       description: string;
@@ -26,7 +26,7 @@ const initialState: IProjectState = {
   title: "",
   description: "",
   creator: "",
-  category: [
+  categories: [
     {
       id: "",
       description: "",
@@ -51,7 +51,7 @@ export default class Project extends Component<IProjectProps, IProjectState> {
   }
 
   render() {
-    const { title, description, category } = this.state;
+    const { title, description, categories: category } = this.state;
     return (
       <div>
         <Header text={title} icon="folder" description={description} />
