@@ -3,20 +3,21 @@ import React, { Component } from "react";
 import "./form-task.css";
 import TaskInputs from "./task-inputs";
 import { SelectProject, SelectCategory, SelectGroup } from "../form-select";
+import ApiService from "../../../services/api-service";
 
 interface IFromTaskState {
-  name: string;
+  title: string;
   description: string;
-  text: string;
+  content: string;
   projectId: string;
   categoryId: string;
   groupId: string;
 }
 
 const initionalState: IFromTaskState = {
-  name: "",
+  title: "",
   description: "",
-  text: "",
+  content: "",
   projectId: "",
   categoryId: "",
   groupId: "",
@@ -29,46 +30,30 @@ export default class FormTask extends Component<{}, IFromTaskState> {
   }
 
   handleChangeName = (event: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({ name: event.currentTarget.value });
+    this.setState({ title: event.currentTarget.value });
   };
-  handleChangeDescription = (
-    event: React.FormEvent<HTMLInputElement>,
-  ): void => {
+  handleChangeDescription = (event: React.FormEvent<HTMLInputElement>): void => {
     this.setState({ description: event.currentTarget.value });
   };
   handleChangeText = (event: React.FormEvent<HTMLTextAreaElement>): void => {
-    this.setState({ text: event.currentTarget.value });
+    this.setState({ content: event.currentTarget.value });
   };
-  handleChangeProject = (
-    selected: React.FormEvent<HTMLSelectElement>,
-  ): void => {
+  handleChangeProject = (selected: React.FormEvent<HTMLSelectElement>): void => {
     this.setState({ projectId: selected.currentTarget.value, categoryId: "" });
-
-    console.log(selected.currentTarget.value);
   };
-  handleChangeCategory = (
-    selected: React.FormEvent<HTMLSelectElement>,
-  ): void => {
+  handleChangeCategory = (selected: React.FormEvent<HTMLSelectElement>): void => {
     this.setState({ categoryId: selected.currentTarget.value });
   };
   handleChangeGroup = (selected: React.FormEvent<HTMLSelectElement>): void => {
     this.setState({ groupId: selected.currentTarget.value });
   };
-  SendForm = () => {
-    console.log("Обработка отправки формы");
-    console.log(this.state);
-    window.alert(`${this.state.name} ${this.state.description}`);
+  apiService = new ApiService();
+  SendForm = async () => {
+    const { title, description, content, projectId, categoryId, groupId } = this.state;
+    await this.apiService.saveTask(title, description, content, projectId, categoryId, groupId);
   };
   render() {
-    console.log(this.state);
-    const {
-      name,
-      description,
-      text,
-      projectId,
-      categoryId,
-      groupId,
-    } = this.state;
+    const { title, description, content, projectId, categoryId, groupId } = this.state;
     return (
       <div className="wrap">
         <div className="form-project">
@@ -100,9 +85,9 @@ export default class FormTask extends Component<{}, IFromTaskState> {
               HandleChangeGroup={this.handleChangeGroup}
             />
             <TaskInputs
-              nameValue={name}
+              nameValue={title}
               descriptionValue={description}
-              textValue={text}
+              textValue={content}
               HandleChangeName={this.handleChangeName}
               HandleChangeDescription={this.handleChangeDescription}
               HandleChangeText={this.handleChangeText}

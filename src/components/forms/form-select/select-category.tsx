@@ -7,19 +7,21 @@ interface ISelectProjectProps {
   HandleChangeCategory: (selected: React.FormEvent<HTMLSelectElement>) => void;
 }
 
-interface ICategory {
+export interface ICategoryMin {
   id: string;
-  name: string;
+  title: string;
 }
 
 const SelectCategory = (props: ISelectProjectProps) => {
-  const [categories, setCategory] = useState([{ id: "", name: "" }]);
+  const [categories, setCategory] = useState([{ id: "", title: "" }]);
 
   useEffect((): void => {
     const LoadData = async () => {
       const apiService = new ApiService();
-      const res: ICategory[] = await apiService.getCategoriesMin(props.projectIdValue);
-      setCategory(res);
+      const res: ICategoryMin[] = await apiService.getCategoriesMin(props.projectIdValue);
+      if (res) {
+        setCategory(res);
+      }
     };
     LoadData();
   }, [props.projectIdValue]);
@@ -32,10 +34,10 @@ const SelectCategory = (props: ISelectProjectProps) => {
       <option value="" hidden>
         Выберите категорию a
       </option>
-      {categories.map(category => {
+      {categories.map((category) => {
         return (
           <option key={category.id} value={category.id}>
-            {category.name}
+            {category.title}
           </option>
         );
       })}

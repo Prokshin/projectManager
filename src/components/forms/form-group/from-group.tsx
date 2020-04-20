@@ -3,16 +3,17 @@ import React, { Component } from "react";
 import "./form-group.css";
 import GroupInputs from "./group-inputs";
 import { SelectProject, SelectCategory } from "../form-select";
+import ApiService from "../../../services/api-service";
 
 interface IFromCategoryState {
-  name: string;
+  title: string;
   description: string;
   projectId: string;
   categoryId: string;
 }
 
 const initialState: IFromCategoryState = {
-  name: "",
+  title: "",
   description: "",
   projectId: "",
   categoryId: "",
@@ -25,36 +26,34 @@ export default class FormGroup extends Component<{}, IFromCategoryState> {
   }
 
   handleChangeName = (event: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({ name: event.currentTarget.value });
+    this.setState({ title: event.currentTarget.value });
   };
 
-  handleChangeDescription = (
-    event: React.FormEvent<HTMLInputElement>,
-  ): void => {
+  handleChangeDescription = (event: React.FormEvent<HTMLInputElement>): void => {
     this.setState({ description: event.currentTarget.value });
   };
 
-  handleChangeProject = (
-    selected: React.FormEvent<HTMLSelectElement>,
-  ): void => {
+  handleChangeProject = (selected: React.FormEvent<HTMLSelectElement>): void => {
     this.setState({ projectId: selected.currentTarget.value });
   };
 
-  handleChangeCategory = (
-    selected: React.FormEvent<HTMLSelectElement>,
-  ): void => {
+  handleChangeCategory = (selected: React.FormEvent<HTMLSelectElement>): void => {
     this.setState({ categoryId: selected.currentTarget.value });
   };
 
-  SendForm = () => {
+  apiService = new ApiService();
+
+  SendForm = async () => {
     console.log("Обработка отправки формы");
     console.log(this.state);
+    const { title, description, projectId, categoryId } = this.state;
     window.alert(
-      `Форма отправлена. Название: ${this.state.name}, Описание: ${this.state.description}`,
+      `Форма отправлена. Название: ${this.state.title}, Описание: ${this.state.description}`,
     );
+    await this.apiService.saveGroup(title, description, projectId, categoryId);
   };
   render() {
-    const { name, description, projectId, categoryId } = this.state;
+    const { title: name, description, projectId, categoryId } = this.state;
     return (
       <div className="wrap">
         <div className="form-project">

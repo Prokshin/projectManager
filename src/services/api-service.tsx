@@ -2,6 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { IProject } from "../components/projects/projects";
 import { IProjectMin } from "../components/forms/form-select/select-project";
+import { ICategoryMin } from "../components/forms/form-select/select-category";
+import { IGroupMin } from "../components/forms/form-select/select-group";
 export default class ApiService {
   private GetRequest = async (url: string) => {
     return axios
@@ -35,13 +37,13 @@ export default class ApiService {
   };
 
   //*Получение данных преокта  и списка категорий по id проекта
-  getProject = async (projectId: string): Promise<IProject> => {
+  getProject = async (projectId: string) => {
     const result = await this.GetRequest(`/${projectId}`);
     return result;
   };
 
   //*Получение данных категории и списка групп по id категории
-  getCategory = async (categoryId: string, projectId: string) => {
+  getCategory = async (projectId: string, categoryId: string) => {
     const result = await this.GetRequest(`/${projectId}/category/${categoryId}`);
     return result;
   };
@@ -60,15 +62,6 @@ export default class ApiService {
     return result;
   };
 
-  //*Создание нового проекта
-  saveProject = async (title: string, description: string) => {
-    const result = await this.PostRequest("", {
-      title,
-      description,
-    });
-    return result;
-  };
-
   //*Получение массива всех проектов в виде [{id, title}]
   getAllProjectsMin = async (): Promise<IProjectMin[]> => {
     const fullProjects: IProject[] = await this.getAllProjects();
@@ -78,6 +71,29 @@ export default class ApiService {
     return result;
   };
 
+  getCategoriesMin = async (id: string): Promise<ICategoryMin[]> => {
+    const fullProject = await this.getProject(id);
+    const result: ICategoryMin[] = fullProject.categories;
+    return result;
+  };
+
+  getGroupMin = async (projectId: string, categoryId: string) => {
+    const fullCategory = await this.getCategory(projectId, categoryId);
+    const result: IGroupMin[] = fullCategory.groups;
+    console.log(result);
+    return result;
+  };
+
+  //*Создание нового проекта
+  saveProject = async (title: string, description: string) => {
+    const result = await this.PostRequest("", {
+      title,
+      description,
+    });
+    return result;
+  };
+
+  //*Создание новой категории
   saveCategory = async (title: string, description: string, projectId: string) => {
     const result = await this.PostRequest(`/${projectId}/category`, {
       title,
@@ -86,17 +102,33 @@ export default class ApiService {
     return result;
   };
 
-  getCategoriesMin = async (id: string) => {
-    if (id === "") {
-      return [];
-    }
-    console.log(`Загрзка категорий проекта ${id}`);
-    return this._categoryMin;
-  };
-  getGroupMin = async (id?: string) => {
-    return this._groupMin;
+  //*Создание новой группы
+  saveGroup = async (title: string, description: string, projectId: string, categoryId: string) => {
+    const result = await this.PostRequest(`/${projectId}/category/${categoryId}/group`, {
+      title,
+      description,
+    });
+    return result;
   };
 
+  saveTask = async (
+    title: string,
+    description: string,
+    content: string,
+    projectId: string,
+    categoryId: string,
+    groupId: string,
+  ) => {
+    const result = await this.PostRequest(
+      `/${projectId}/category/${categoryId}/group/${groupId}/task`,
+      {
+        title,
+        description,
+        content,
+      },
+    );
+    return result;
+  };
   getUser = async (id?: string) => {
     return this._userMin;
   };

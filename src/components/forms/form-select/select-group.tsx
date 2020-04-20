@@ -8,37 +8,38 @@ interface ISelectGroupProps {
   HandleChangeGroup: (selected: React.FormEvent<HTMLSelectElement>) => void;
 }
 
-interface IGroup {
+export interface IGroupMin {
   id: string;
-  name: string;
+  title: string;
 }
 
 const SelectGroup = (props: ISelectGroupProps) => {
-  const [groups, setGroups] = useState([{ id: "", name: "" }]);
+  const { projectIdValue, categoryIdValue, groupIdValue, HandleChangeGroup } = props;
+  const [groups, setGroups] = useState([{ id: "", title: "" }]);
 
   useEffect((): void => {
-    if (props.categoryIdValue !== "") {
+    if (categoryIdValue !== "") {
       const LoadData = async () => {
         const apiService = new ApiService();
-        const res: IGroup[] = await apiService.getGroupMin(props.categoryIdValue);
+        const res: IGroupMin[] = await apiService.getGroupMin(projectIdValue, categoryIdValue);
         setGroups(res);
       };
       LoadData();
     }
-  }, [props.categoryIdValue]);
+  }, [categoryIdValue, projectIdValue]);
   return (
     <select
       className="form-project__inputs__select"
-      value={props.groupIdValue}
-      onChange={props.HandleChangeGroup}
+      value={groupIdValue}
+      onChange={HandleChangeGroup}
     >
       <option value="" hidden>
         Выберите категорию
       </option>
-      {groups.map(data => {
+      {groups.map((data) => {
         return (
           <option key={data.id} value={data.id}>
-            {data.name}
+            {data.title}
           </option>
         );
       })}
