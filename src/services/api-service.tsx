@@ -15,7 +15,18 @@ export default class ApiService {
       })
       .catch((e) => console.error(e + "какая-то херня"));
   };
-
+  PostRequest = async (url: string, data: object) => {
+    return axios.post(
+      `http://localhost:8080/api/user/${Cookies.get("userId")}/project${url}`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("jwt")}`,
+          "Content-type": "application/json",
+        },
+      },
+    );
+  };
   //*Получение всех проектов пользователя
   getAllProjects = async (): Promise<IProjectMin[]> => {
     const results: IProjectMin[] = await this.GetRequest(``);
@@ -35,18 +46,29 @@ export default class ApiService {
     return result;
   };
 
-  //*Получени данных группы и списка задач по id группы
+  //*Получение данных группы и списка задач по id группы
   getGroup = async (projectId: string, categoryId: string, groupId: string) => {
     const result = await this.GetRequest(`/${projectId}/category/${categoryId}/group/${groupId}`);
     return result;
   };
 
+  //*Получение данных задачи и списка коментариев
   getTask = async (projectId: string, categoryId: string, groupId: string, taskId: string) => {
     const result = await this.GetRequest(
       `/${projectId}/category/${categoryId}/group/${groupId}/task/${taskId}`,
     );
     return result;
   };
+
+  saveProject = async (title: string, description: string) => {
+    console.log(`Bearer ${Cookies.get("jwt")}`);
+    const result = await this.PostRequest("", {
+      title,
+      description,
+    });
+    return result;
+  };
+
   getUser = async (id?: string) => {
     return this._userMin;
   };

@@ -2,9 +2,10 @@ import React, { Component } from "react";
 
 import "./form-project.css";
 import InputsProject from "./inputs-project";
+import ApiService from "../../../services/api-service";
 
 interface IFromProjectState {
-  name: string;
+  title: string;
   description: string;
 }
 
@@ -12,23 +13,24 @@ export default class FormProject extends Component<{}, IFromProjectState> {
   constructor(props: never) {
     super(props);
     this.state = {
-      name: "",
-      description: ""
+      title: "",
+      description: "",
     };
   }
 
+  apiService = new ApiService();
+
   handleChangeName = (event: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({ name: event.currentTarget.value });
+    this.setState({ title: event.currentTarget.value });
   };
-  handleChangeDescription = (
-    event: React.FormEvent<HTMLInputElement>
-  ): void => {
+  handleChangeDescription = (event: React.FormEvent<HTMLInputElement>): void => {
     this.setState({ description: event.currentTarget.value });
   };
-  SendForm = () => {
-    console.log("Обработка отправки формы");
-    console.log(this.state);
-    window.alert(`${this.state.name} ${this.state.description}`);
+  SendForm = async () => {
+    const { title, description } = this.state;
+    if (title && description) {
+      this.apiService.saveProject(title, description).then((res) => console.log(res));
+    } else window.alert("Заполните форму");
   };
   render() {
     return (
@@ -46,7 +48,7 @@ export default class FormProject extends Component<{}, IFromProjectState> {
             </button>
           </div>
           <InputsProject
-            nameValue={this.state.name}
+            nameValue={this.state.title}
             HandleChangeName={this.handleChangeName}
             descriptionValue={this.state.description}
             HandleChangeDescription={this.handleChangeDescription}
