@@ -16,7 +16,7 @@ const GroupPage = ({ projectId, categoryId }: IGroupPageProps) => {
           <Group projectId={projectId} categoryId={categoryId} groupId={groupId} />
         </Route>
         <Route path={`${match.url}/:taskId`}>
-          <TaskPage />
+          <TaskPage projectId={projectId} categoryId={categoryId} groupId={groupId} />
         </Route>
       </Switch>
     </div>

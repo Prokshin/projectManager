@@ -7,7 +7,10 @@ import { comment } from "../comment/comment";
 import TaskCard from "./task-card";
 
 interface ITaskProps {
-  taskId?: string;
+  taskId: string | undefined;
+  projectId: string | undefined;
+  categoryId: string | undefined;
+  groupId: string | undefined;
 }
 
 interface ITaskState {
@@ -51,15 +54,18 @@ export default class Task extends Component<ITaskProps, ITaskState> {
   apiService = new ApiService();
 
   componentDidMount() {
-    this.apiService.getTask(this.props.taskId).then((res: any) => {
-      this.setState({
-        title: res.title,
-        description: res.description,
-        text: res.content,
-        status: res.status,
-        comments: res.comments,
+    const { projectId, categoryId, groupId, taskId } = this.props;
+    if (projectId && categoryId && groupId && taskId) {
+      this.apiService.getTask(projectId, categoryId, groupId, taskId).then((res: any) => {
+        this.setState({
+          title: res.title,
+          description: res.description,
+          text: res.content,
+          status: res.status,
+          comments: res.comments,
+        });
       });
-    });
+    }
   }
 
   handleClick = () => {

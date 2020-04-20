@@ -1,5 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { IProjectMin } from "../components/projects/projects";
+
 export default class ApiService {
   GetRequest = async (url: string) => {
     return axios
@@ -11,12 +13,12 @@ export default class ApiService {
       .then((res) => {
         return res.data;
       })
-      .catch((e) => console.error(e));
+      .catch((e) => console.error(e + "какая-то херня"));
   };
 
   //*Получение всех проектов пользователя
-  getAllProjects = async () => {
-    const results = await this.GetRequest(``);
+  getAllProjects = async (): Promise<IProjectMin[]> => {
+    const results: IProjectMin[] = await this.GetRequest(``);
     return results;
   };
 
@@ -39,8 +41,10 @@ export default class ApiService {
     return result;
   };
 
-  getTask = async (id?: string) => {
-    const result = await this.GetRequest(`/1/category/1/group/1/task/1`);
+  getTask = async (projectId: string, categoryId: string, groupId: string, taskId: string) => {
+    const result = await this.GetRequest(
+      `/${projectId}/category/${categoryId}/group/${groupId}/task/${taskId}`,
+    );
     return result;
   };
   getUser = async (id?: string) => {

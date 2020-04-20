@@ -1,14 +1,18 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Task from "../task";
-
-const TaskPage = () => {
+interface IGroupPageProps {
+  projectId: string | undefined;
+  categoryId: string | undefined;
+  groupId: string | undefined;
+}
+const TaskPage = (props: IGroupPageProps) => {
   //const match = useRouteMatch();
   const { taskId } = useParams();
-  console.log(taskId);
+
   return (
     <>
-      <Task taskId={taskId} />
+      <Task taskId={taskId} {...props} />
     </>
   );
 };
