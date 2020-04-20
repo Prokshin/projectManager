@@ -1,9 +1,9 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { IProjectMin } from "../components/projects/projects";
-
+import { IProject } from "../components/projects/projects";
+import { IProjectMin } from "../components/forms/form-select/select-project";
 export default class ApiService {
-  GetRequest = async (url: string) => {
+  private GetRequest = async (url: string) => {
     return axios
       .get(`http://127.0.0.1:8080/api/user/${Cookies.get("userId")}/project${url}`, {
         headers: {
@@ -15,7 +15,7 @@ export default class ApiService {
       })
       .catch((e) => console.error(e + "какая-то херня"));
   };
-  PostRequest = async (url: string, data: object) => {
+  private PostRequest = async (url: string, data: object) => {
     return axios.post(
       `http://localhost:8080/api/user/${Cookies.get("userId")}/project${url}`,
       data,
@@ -27,16 +27,16 @@ export default class ApiService {
       },
     );
   };
+
   //*Получение всех проектов пользователя
-  getAllProjects = async (): Promise<IProjectMin[]> => {
-    const results: IProjectMin[] = await this.GetRequest(``);
+  getAllProjects = async (): Promise<IProject[]> => {
+    const results: IProject[] = await this.GetRequest(``);
     return results;
   };
 
   //*Получение данных преокта  и списка категорий по id проекта
-  getProject = async (projectId: string) => {
+  getProject = async (projectId: string): Promise<IProject> => {
     const result = await this.GetRequest(`/${projectId}`);
-    console.log(result);
     return result;
   };
 
@@ -60,8 +60,8 @@ export default class ApiService {
     return result;
   };
 
+  //*Создание нового проекта
   saveProject = async (title: string, description: string) => {
-    console.log(`Bearer ${Cookies.get("jwt")}`);
     const result = await this.PostRequest("", {
       title,
       description,
@@ -69,13 +69,23 @@ export default class ApiService {
     return result;
   };
 
-  getUser = async (id?: string) => {
-    return this._userMin;
+  //*Получение массива всех проектов в виде [{id, title}]
+  getAllProjectsMin = async (): Promise<IProjectMin[]> => {
+    const fullProjects: IProject[] = await this.getAllProjects();
+    const result: IProjectMin[] = fullProjects.map((res) => {
+      return { id: res.id, title: res.title };
+    });
+    return result;
   };
 
-  getAllProjectsMin = async () => {
-    return this._projectsMin;
+  saveCategory = async (title: string, description: string, projectId: string) => {
+    const result = await this.PostRequest(`/${projectId}/category`, {
+      title,
+      description,
+    });
+    return result;
   };
+
   getCategoriesMin = async (id: string) => {
     if (id === "") {
       return [];
@@ -86,6 +96,11 @@ export default class ApiService {
   getGroupMin = async (id?: string) => {
     return this._groupMin;
   };
+
+  getUser = async (id?: string) => {
+    return this._userMin;
+  };
+
   // Registration = async () => {
   //   try {
   //     const response = await fetch("http://localhost:8080/api/user/login", {

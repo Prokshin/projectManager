@@ -4,9 +4,10 @@ import "./form-category.css";
 
 import CategoryInputs from "./category-inputs";
 import { SelectProject } from "../form-select";
+import ApiService from "../../../services/api-service";
 
 interface IFromCategoryState {
-  name: string;
+  title: string;
   description: string;
   projectId: string;
 }
@@ -15,32 +16,31 @@ export default class FormCategoty extends Component<{}, IFromCategoryState> {
   constructor(props: never) {
     super(props);
     this.state = {
-      name: "",
+      title: "",
       description: "",
       projectId: "",
     };
   }
-
+  apiService = new ApiService();
   handleChangeName = (event: React.FormEvent<HTMLInputElement>): void => {
-    this.setState({ name: event.currentTarget.value });
+    this.setState({ title: event.currentTarget.value });
   };
-  handleChangeDescription = (
-    event: React.FormEvent<HTMLInputElement>,
-  ): void => {
+  handleChangeDescription = (event: React.FormEvent<HTMLInputElement>): void => {
     this.setState({ description: event.currentTarget.value });
   };
-  handleChangeProject = (
-    selected: React.FormEvent<HTMLSelectElement>,
-  ): void => {
+  handleChangeProject = (selected: React.FormEvent<HTMLSelectElement>): void => {
     this.setState({ projectId: selected.currentTarget.value });
     console.log(selected.currentTarget.value);
   };
-  SendForm = () => {
-    console.log("Обработка отправки формы");
-    console.log(this.state);
-    window.alert(`${this.state.name} ${this.state.description}`);
+  SendForm = async () => {
+    const { title, description, projectId } = this.state;
+    if (title && description && projectId) {
+      await this.apiService.saveCategory(title, description, projectId);
+    }
   };
   render() {
+    const { projectId, title, description } = this.state;
+    const { handleChangeName, handleChangeDescription, handleChangeProject, SendForm } = this;
     return (
       <div className="wrap">
         <div className="form-project">
@@ -50,21 +50,18 @@ export default class FormCategoty extends Component<{}, IFromCategoryState> {
               Категория
             </h2>
             <p>Введите название и описание категоhии</p>
-            <button className="button green-bg" onClick={this.SendForm}>
+            <button className="button green-bg" onClick={SendForm}>
               <ion-icon name={"add"} />
               Создать категорию
             </button>
           </div>
           <div className="form-project__inputs">
-            <SelectProject
-              projectIdValue={this.state.projectId}
-              HandleChangeProject={this.handleChangeProject}
-            />
+            <SelectProject projectIdValue={projectId} HandleChangeProject={handleChangeProject} />
             <CategoryInputs
-              nameValue={this.state.name}
-              HandleChangeName={this.handleChangeName}
-              descriptionValue={this.state.description}
-              HandleChangeDescription={this.handleChangeDescription}
+              nameValue={title}
+              HandleChangeName={handleChangeName}
+              descriptionValue={description}
+              HandleChangeDescription={handleChangeDescription}
             />
           </div>
         </div>

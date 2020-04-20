@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import ApiService from "../../services/api-service";
 import Card from "../card";
 
-export interface IProjectMin {
+export interface IProject {
   id: string;
   title: string;
   description: string | undefined;
 }
 interface IProjectsState {
-  projects: IProjectMin[];
+  projects: IProject[];
 }
 
 export default class Projects extends Component<{}, IProjectsState> {
@@ -27,7 +27,7 @@ export default class Projects extends Component<{}, IProjectsState> {
   //Запрос на сервер
   apiService = new ApiService();
   componentDidMount() {
-    this.apiService.getAllProjects().then((res: IProjectMin[]) => {
+    this.apiService.getAllProjects().then((res: IProject[]) => {
       if (res) {
         this.setState({ projects: res });
       } else console.error("Ошибка");
@@ -41,7 +41,7 @@ export default class Projects extends Component<{}, IProjectsState> {
     }
     return (
       <div className="flex-wrapper">
-        {projects.map((el: IProjectMin) => {
+        {projects.map((el: IProject) => {
           return <Card key={el.id} id={el.id} title={el.title} description={el.description} />;
         })}
       </div>

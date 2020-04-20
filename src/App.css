@@ -1,5 +1,7 @@
 .content {
-  margin-left: 275px;
+  margin: 0 auto;
+  padding-left: 275px;
+  max-width: 1600px;
 }
 .flex-wrapper {
   /* margin: 0 50px; */

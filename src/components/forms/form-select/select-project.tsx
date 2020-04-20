@@ -6,17 +6,17 @@ interface ISelectProjectProps {
   HandleChangeProject: (selected: React.FormEvent<HTMLSelectElement>) => void;
 }
 
-interface IProjects {
+export interface IProjectMin {
   id: string;
-  name: string;
+  title: string;
 }
 
 const SelectProject = (props: ISelectProjectProps) => {
-  const [projects, setProjects] = useState([{ id: "", name: "Загрузка данных" }]);
+  const [projects, setProjects] = useState([{ id: "", title: "Загрузка данных" }]);
 
   const apiService = new ApiService();
   const LoadData = async () => {
-    const res: IProjects[] = await apiService.getAllProjectsMin();
+    const res: IProjectMin[] = await apiService.getAllProjectsMin();
     setProjects(res);
   };
 
@@ -34,10 +34,10 @@ const SelectProject = (props: ISelectProjectProps) => {
       <option value="" hidden>
         Выберите проект
       </option>
-      {projects.map(data => {
+      {projects.map((data) => {
         return (
           <option key={data.id} value={data.id}>
-            {data.name}
+            {data.title}
           </option>
         );
       })}
