@@ -6,7 +6,11 @@
 
 Для запуска на компьютере должны быть установлены: node.js и npm.
 
-Для запуска скачать репозиторий:
+Также необходимо запустить сервер:
+
+    https://github.com/ShamRail/todolist-api
+
+Для запуска клиентской части скачать текущий репозиторий:
 
     git clone "https://github.com/Prokshin/projectManager.git"
 
