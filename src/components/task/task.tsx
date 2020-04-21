@@ -18,7 +18,7 @@ interface ITaskState {
   title: string;
   description?: string;
   text: string;
-  status: statusType;
+  status?: statusType;
   creator?: string;
   deadline?: Date;
   comments?: comment[];
@@ -60,7 +60,7 @@ export default class Task extends Component<ITaskProps, ITaskState> {
         this.setState({
           title: res.title,
           description: res.description,
-          text: res.content,
+          text: res.taskContent.text,
           status: res.status,
           comments: res.comments,
         });

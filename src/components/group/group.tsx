@@ -1,46 +1,27 @@
 import React, { Component } from "react";
-import ApiService from "../../services/api-service";
+import ApiService, { IGroupExtend } from "../../services/api-service";
 import Card from "../card";
 import Header from "../header";
-
 interface IGroupProps {
-  type?: string;
   groupId: string | undefined;
   categoryId: string | undefined;
   projectId: string | undefined;
 }
 
-type task = {
-  id: string;
-  title: string;
-  description: string;
+const initialState: IGroupExtend = {
+  id: "",
+  title: "",
+  description: "",
+  tasks: [
+    {
+      id: "",
+      title: "",
+      description: "",
+    },
+  ],
 };
 
-interface IGroupState {
-  group: {
-    id: string;
-    title: string;
-    description: string;
-    tasks: task[];
-  };
-}
-
-const initialState: IGroupState = {
-  group: {
-    id: "",
-    title: "",
-    description: "",
-    tasks: [
-      {
-        id: "",
-        title: "",
-        description: "",
-      },
-    ],
-  },
-};
-
-export default class Group extends Component<IGroupProps, IGroupState> {
+export default class Group extends Component<IGroupProps, IGroupExtend> {
   constructor(props: IGroupProps) {
     super(props);
     this.state = initialState;
@@ -50,28 +31,19 @@ export default class Group extends Component<IGroupProps, IGroupState> {
   componentDidMount() {
     const { projectId, categoryId, groupId } = this.props;
     if (groupId && categoryId && projectId) {
-      this.apiService.getGroup(projectId, categoryId, groupId).then((res: any) => {
-        this.setState({
-          group: res,
-        });
+      this.apiService.getGroup(projectId, categoryId, groupId).then((res: IGroupExtend) => {
+        this.setState(res);
       });
     }
   }
 
   renderItems() {
-    if (this.state.group) {
-      return this.state.group.tasks.map((el, index) => {
-        if (el.id === "main") {
-          return "";
-        }
-        let id = el.id;
-        if (this.props.type === "without_header") {
-          id = `main/${el.id}`;
-        }
+    if (this.state.tasks) {
+      return this.state.tasks.map((el, index) => {
         return (
           <Card
-            key={index}
-            id={id}
+            key={el.id}
+            id={el.id}
             title={el.title}
             description={el.description}
             status="unknown"
@@ -81,26 +53,12 @@ export default class Group extends Component<IGroupProps, IGroupState> {
     }
   }
 
-  renderHeader() {
-    if (this.props.type === "without_header") {
-      return "";
-    } else {
-      return (
-        <Header
-          text={this.state.group.title}
-          icon="albums"
-          description={this.state.group.description}
-        />
-      );
-    }
-  }
-
   render() {
     const items = this.renderItems();
-    const header = this.renderHeader();
+
     return (
       <div>
-        {header}
+        <Header text={this.state.title} icon="albums" description={this.state.description} />
         <div className="flex-wrapper">{items}</div>
       </div>
     );

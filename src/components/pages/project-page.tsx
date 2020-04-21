@@ -7,16 +7,14 @@ const ProjectPage = () => {
   const match = useRouteMatch();
   const { projectId } = useParams();
   return (
-    <div>
-      <Switch>
-        <Route exact path={match.url}>
-          <Project projectId={projectId} />
-        </Route>
-        <Route path={`${match.url}/:categoryId`}>
-          <CategoryPage projectId={projectId} />
-        </Route>
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path={match.url}>
+        <Project projectId={projectId} />
+      </Route>
+      <Route path={`${match.url}/:categoryId`}>
+        <CategoryPage projectId={projectId} />
+      </Route>
+    </Switch>
   );
 };
 export default ProjectPage;

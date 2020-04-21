@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ApiService from "../../services/api-service";
+import ApiService, { IProjectExtend } from "../../services/api-service";
 import Card from "../card";
 import Header from "../header";
 
@@ -7,25 +7,14 @@ interface IProjectProps {
   projectId: string | undefined;
 }
 
-interface IProjectState {
-  id: string;
-  title: string;
-  description?: string;
-  creator?: string;
-  categories: [
-    {
-      id: string;
-      description: string;
-      title: string;
-    },
-  ];
-}
-
-const initialState: IProjectState = {
+const initialState: IProjectExtend = {
   id: "",
   title: "",
   description: "",
-  creator: "",
+  creator: {
+    id: "",
+    email: "",
+  },
   categories: [
     {
       id: "",
@@ -35,7 +24,7 @@ const initialState: IProjectState = {
   ],
 };
 
-export default class Project extends Component<IProjectProps, IProjectState> {
+export default class Project extends Component<IProjectProps, IProjectExtend> {
   constructor(props: IProjectProps) {
     super(props);
     this.state = initialState;
@@ -44,7 +33,7 @@ export default class Project extends Component<IProjectProps, IProjectState> {
   apiService = new ApiService();
   componentDidMount() {
     if (this.props.projectId) {
-      this.apiService.getProject(this.props.projectId).then((res: IProjectState | any) => {
+      this.apiService.getProject(this.props.projectId).then((res: IProjectExtend) => {
         this.setState(res);
       });
     }

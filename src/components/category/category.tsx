@@ -1,27 +1,14 @@
 import React, { Component } from "react";
-import ApiService from "../../services/api-service";
+import ApiService, { ICategoryExtend } from "../../services/api-service";
 import Card from "../card";
 import Header from "../header";
-// import Group from "../group/group";
 
-type Groups = {
-  id: string;
-  description?: string;
-  title: string;
-};
 interface ICategoryProps {
-  categoryId?: string;
-  projectId?: string;
-}
-interface ICategoryState {
-  id: string;
-  title: string;
-  description?: string;
-  creator?: string;
-  groups: Groups[];
+  categoryId: string | undefined;
+  projectId: string | undefined;
 }
 
-const initialState: ICategoryState = {
+const initialState: ICategoryExtend = {
   id: "",
   title: "",
   description: "",
@@ -32,9 +19,14 @@ const initialState: ICategoryState = {
       description: "",
     },
   ],
+  project: {
+    id: "",
+    title: "",
+    description: "",
+  },
 };
 
-export default class Category extends Component<ICategoryProps, ICategoryState> {
+export default class Category extends Component<ICategoryProps, ICategoryExtend> {
   constructor(props: ICategoryProps) {
     super(props);
     this.state = initialState;
@@ -45,7 +37,7 @@ export default class Category extends Component<ICategoryProps, ICategoryState> 
     if (this.props.categoryId && this.props.projectId) {
       this.apiService
         .getCategory(this.props.categoryId, this.props.projectId)
-        .then((res: ICategoryState | any) => {
+        .then((res: ICategoryExtend) => {
           this.setState(res);
         });
     } else console.error("Ошибка, нет идентификатора категории или проекта");

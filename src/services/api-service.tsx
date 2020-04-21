@@ -4,6 +4,69 @@ import { IProject } from "../components/projects/projects";
 import { IProjectMin } from "../components/forms/form-select/select-project";
 import { ICategoryMin } from "../components/forms/form-select/select-category";
 import { IGroupMin } from "../components/forms/form-select/select-group";
+
+interface ICreator {
+  id: string;
+  email: string;
+}
+export interface IProjectExtend {
+  id: string;
+  title: string;
+  description: string;
+  creator: ICreator;
+  categories: ICategory[];
+}
+
+interface ICategory {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface ICategoryExtend {
+  id: string;
+  title: string;
+  description: string;
+  groups: IGroup[];
+  project: IProject;
+}
+
+interface IGroup {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface IGroupExtend {
+  id: string;
+  title: string;
+  description: string;
+  tasks: ITask[];
+}
+
+interface ITask {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface ITaskExtend {
+  id: string;
+  title: string;
+  description: string;
+  taskContent: {
+    id: string;
+    text: string;
+  };
+  comments: IComment[];
+}
+
+interface IComment {
+  id: string;
+  text: string;
+  author: ICreator;
+}
+
 export default class ApiService {
   private GetRequest = async (url: string) => {
     return axios
@@ -37,26 +100,37 @@ export default class ApiService {
   };
 
   //*Получение данных преокта  и списка категорий по id проекта
-  getProject = async (projectId: string) => {
-    const result = await this.GetRequest(`/${projectId}`);
+  getProject = async (projectId: string): Promise<IProjectExtend> => {
+    const result: IProjectExtend = await this.GetRequest(`/${projectId}`);
     return result;
   };
 
   //*Получение данных категории и списка групп по id категории
-  getCategory = async (projectId: string, categoryId: string) => {
-    const result = await this.GetRequest(`/${projectId}/category/${categoryId}`);
+  getCategory = async (projectId: string, categoryId: string): Promise<ICategoryExtend> => {
+    const result: ICategoryExtend = await this.GetRequest(`/${projectId}/category/${categoryId}`);
     return result;
   };
 
   //*Получение данных группы и списка задач по id группы
-  getGroup = async (projectId: string, categoryId: string, groupId: string) => {
-    const result = await this.GetRequest(`/${projectId}/category/${categoryId}/group/${groupId}`);
+  getGroup = async (
+    projectId: string,
+    categoryId: string,
+    groupId: string,
+  ): Promise<IGroupExtend> => {
+    const result: IGroupExtend = await this.GetRequest(
+      `/${projectId}/category/${categoryId}/group/${groupId}`,
+    );
     return result;
   };
 
   //*Получение данных задачи и списка коментариев
-  getTask = async (projectId: string, categoryId: string, groupId: string, taskId: string) => {
-    const result = await this.GetRequest(
+  getTask = async (
+    projectId: string,
+    categoryId: string,
+    groupId: string,
+    taskId: string,
+  ): Promise<ITaskExtend> => {
+    const result: ITaskExtend = await this.GetRequest(
       `/${projectId}/category/${categoryId}/group/${groupId}/task/${taskId}`,
     );
     return result;
@@ -71,14 +145,16 @@ export default class ApiService {
     return result;
   };
 
+  //*Получение массива всех категорий в виде [{id, title}]
   getCategoriesMin = async (id: string): Promise<ICategoryMin[]> => {
-    const fullProject = await this.getProject(id);
+    const fullProject: IProjectExtend = await this.getProject(id);
     const result: ICategoryMin[] = fullProject.categories;
     return result;
   };
 
+  //*Получение массива всех групп в виде [{id, title}]
   getGroupMin = async (projectId: string, categoryId: string) => {
-    const fullCategory = await this.getCategory(projectId, categoryId);
+    const fullCategory: ICategoryExtend = await this.getCategory(projectId, categoryId);
     const result: IGroupMin[] = fullCategory.groups;
     console.log(result);
     return result;
@@ -111,6 +187,7 @@ export default class ApiService {
     return result;
   };
 
+  //*Создание новой задачи
   saveTask = async (
     title: string,
     description: string,
@@ -132,214 +209,6 @@ export default class ApiService {
   getUser = async (id?: string) => {
     return this._userMin;
   };
-
-  // Registration = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:8080/api/user/login", {
-  //       method: "POST", // или 'PUT'
-  //       body: JSON.stringify({
-  //         email: "rail@mail.ru",
-  //         password: "123",
-  //       }), // данные могут быть 'строкой' или {объектом}!
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     const json = await response.json();
-  //     console.log("Успех:", JSON.stringify(json));
-  //   } catch (error) {
-  //     console.error("Ошибка:", error);
-  //   }
-  // };
-  _pojects = [
-    {
-      id: 0,
-      title: "projectManager",
-      description:
-        "Разработка системы управления проектами, с использованием иерархического структурирования бизнес задач",
-      creator: "Иванов Иван",
-      category: [
-        {
-          id: "0_0",
-          title: "Дизайн",
-          description: "gg",
-        },
-        {
-          id: "0_1",
-          title: "Frontend",
-          description: "gg",
-        },
-        {
-          id: "0_2",
-          title: "Backend",
-          description: "gg",
-        },
-        {
-          id: "0_3",
-          title: "SMM",
-          description: "gg",
-        },
-      ],
-    },
-    {
-      id: 1,
-      title: "Сайт web студии",
-      description: "описание",
-      category: [
-        {
-          id: "1_0",
-          title: "Дизайн",
-          description: "gg",
-        },
-        {
-          id: "1_1",
-          title: "Верстка",
-          description: "gg",
-        },
-        {
-          id: "1_2",
-          title: "Backend",
-          description: "gg",
-        },
-        {
-          id: "1_3",
-          title: "Базы данных",
-          description: "gg",
-        },
-      ],
-    },
-  ];
-
-  _category = {
-    id: "01",
-    title: "Дизайн",
-    description:
-      "Очень длинное описание категории, в которой будет разрабатываться внешний вид инетерфейсв приложения",
-    groups: [
-      {
-        id: "main",
-        title: "основная категория",
-      },
-      {
-        id: "001",
-        title: "UI",
-        description: "описание UI",
-      },
-      {
-        id: "002",
-        title: "Рекламные банеры",
-        description: "описание UI",
-      },
-      {
-        id: "003",
-        title: "Айдентика",
-        description: "описание UI",
-      },
-    ],
-  };
-
-  _group = {
-    id: "001",
-    title: "UI",
-    description: "Дизайн пользовательского интерфейса приложения. Используется adobe xd.",
-    tasks: [
-      {
-        id: "0001",
-        title: "Заголовок 1 задачи",
-        description: "Описание 1 задачи",
-      },
-      {
-        id: "0002",
-        title: "Заголовок 2 задачи",
-        description: "Описание 3 задачи",
-      },
-      {
-        id: "0003",
-        title: "Заголовок 3 задачи",
-        description: "Описание 3 задачи",
-      },
-      {
-        id: "0004",
-        title: "Заголовок 4 задачи",
-        description: "Описание 4 задачи",
-      },
-    ],
-  };
-
-  _task = {
-    id: "00000",
-    title: "Дизайн главной страницы",
-    description: "Создания внешнего вида и структуры главной страницы сайта",
-    text: "nnnnnnnnn",
-    status: "available",
-    comments: [
-      {
-        text: "текст",
-        author: "Иванов Иван",
-        link: {
-          url: "",
-          text: "Текст ссылки",
-        },
-      },
-      {
-        text: "текст",
-        author: "Иванов Иван",
-        link: {
-          url: "",
-          text: "Текст ссылки",
-        },
-      },
-      {
-        text: "текст 2",
-        author: "Иванов Иван",
-        link: {
-          url: "",
-          text: "Текст ссылки",
-        },
-      },
-      {
-        text: "текст 3",
-        author: "Иванов Иван",
-        link: {
-          url: "",
-          text: "Текст ссылки",
-        },
-      },
-    ],
-  };
-
-  _projectsMin = [
-    {
-      id: "0",
-      name: "projectManager",
-    },
-    {
-      id: "1",
-      name: "Сайт web студии",
-    },
-  ];
-
-  _categoryMin = [
-    {
-      id: "0_0",
-      name: "Дизайн",
-    },
-    {
-      id: "0_1",
-      name: "Frontend",
-    },
-  ];
-
-  _groupMin = [
-    {
-      id: "0_0",
-      name: "UI",
-    },
-    {
-      id: "0_1",
-      name: "Айдентика",
-    },
-  ];
 
   _userMin = {
     id: "00",
