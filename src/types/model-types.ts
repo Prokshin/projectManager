@@ -48,3 +48,16 @@ export interface IUser {
   username: string,
   email: string,
 }
+
+export interface ICategory {
+  id: number,
+    title: string,
+    description: string,
+    groups: [
+        {
+            id: number,
+            title: string,
+            description: string
+        }
+    ]
+}

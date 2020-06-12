@@ -5,6 +5,7 @@ import "./form-category.css";
 import CategoryInputs from "./category-inputs";
 import { SelectProject } from "../form-select";
 import ApiService from "../../../services/api-service";
+import { message } from "antd";
 
 interface IFromCategoryState {
   title: string;
@@ -36,6 +37,7 @@ export default class FormCategoty extends Component<{}, IFromCategoryState> {
     const { title, description, projectId } = this.state;
     if (title && description && projectId) {
       await this.apiService.saveCategory(title, description, projectId);
+      message.success('Категория успешно создана');
     }
   };
   render() {

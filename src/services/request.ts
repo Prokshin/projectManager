@@ -22,7 +22,7 @@ export default class RequestService implements IRequestService {
       headers: this.requestHeaders,
       body: JSON.stringify(data),
     });
-    console.log(response)
+    console.log("========", response)
     if (!response.ok) throw new Error('Ошибка');
 
     return response;

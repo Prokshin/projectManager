@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./form-project.css";
 import InputsProject from "./inputs-project";
 import ApiService from "../../../services/api-service";
+import { message } from "antd";
 
 interface IFromProjectState {
   title: string;
@@ -29,7 +30,8 @@ export default class FormProject extends Component<{}, IFromProjectState> {
   SendForm = async () => {
     const { title, description } = this.state;
     if (title && description) {
-      this.apiService.saveProject(title, description).then((res) => console.log(res));
+      await this.apiService.saveProject(title, description).then((res) => console.log(res));
+      message.success('Проект успешно создан');
     } else window.alert("Заполните форму");
   };
   render() {

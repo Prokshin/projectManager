@@ -4,6 +4,7 @@ import "./form-group.css";
 import GroupInputs from "./group-inputs";
 import { SelectProject, SelectCategory } from "../form-select";
 import ApiService from "../../../services/api-service";
+import { message } from "antd";
 
 interface IFromCategoryState {
   title: string;
@@ -47,10 +48,8 @@ export default class FormGroup extends Component<{}, IFromCategoryState> {
     console.log("Обработка отправки формы");
     console.log(this.state);
     const { title, description, projectId, categoryId } = this.state;
-    window.alert(
-      `Форма отправлена. Название: ${this.state.title}, Описание: ${this.state.description}`,
-    );
-    await this.apiService.saveGroup(title, description, projectId, categoryId);
+        await this.apiService.saveGroup(title, description, projectId, categoryId);
+        message.success('Группа успешно создан');
   };
   render() {
     const { title: name, description, projectId, categoryId } = this.state;

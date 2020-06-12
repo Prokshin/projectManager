@@ -4,42 +4,39 @@ import Card from "../card";
 import Header from "../header";
 import { Button } from "antd";
 import ApiCategoryService from "../../services/api-category-service";
+import { ICategory } from "../../types/model-types";
 
 interface ICategoryProps {
   categoryId: string | undefined;
   projectId: string | undefined;
 }
 
-const initialState: ICategoryExtend = {
-  id: "",
+const initialState: ICategory = {
+  id: 0,
   title: "",
   description: "",
   groups: [
     {
-      id: "",
+      id: 0,
       title: "",
       description: "",
     },
   ],
-  project: {
-    id: "",
-    title: "",
-    description: "",
-  },
+ 
 };
 
-export default class Category extends Component<ICategoryProps, ICategoryExtend> {
+export default class Category extends Component<ICategoryProps, ICategory> {
   constructor(props: ICategoryProps) {
     super(props);
     this.state = initialState;
   }
   //Запрос на сервер
-  apiService = new ApiService();
+  apiService = new ApiCategoryService();
   componentDidMount() {
     if (this.props.categoryId && this.props.projectId) {
       this.apiService
-        .getCategory(this.props.categoryId, this.props.projectId)
-        .then((res: ICategoryExtend) => {
+        .getCategory(this.props.projectId, this.props.categoryId)
+        .then((res: ICategory) => {
           this.setState(res);
         });
     } else console.error("Ошибка, нет идентификатора категории или проекта");
@@ -47,13 +44,10 @@ export default class Category extends Component<ICategoryProps, ICategoryExtend>
   //Создание массива карточек групп
   renderItems() {
     return this.state.groups.map((el, index) => {
-      if (el.id === "main") {
-        return "";
-      }
       return (
         <Card
           key={index}
-          id={el.id}
+          id={el.id.toString()}
           status = {null}
           title={el.title}
           description={el.description}
