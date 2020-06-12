@@ -43,3 +43,8 @@ export interface IParticipant {
   registrationDate: string,
   role: string | null | undefined
 }
+
+export interface IUser {
+  username: string,
+  email: string,
+}
