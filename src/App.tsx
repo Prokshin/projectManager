@@ -11,7 +11,7 @@ import CreatePage from "./components/pages/create-page";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Router>
+      <Router basename="/app">
         <Navigation />
         <div className="content">
           <Switch>

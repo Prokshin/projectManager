@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ApiService, { IGroupExtend } from "../../services/api-service";
 import Card from "../card";
 import Header from "../header";
+import { Button } from "antd";
+import ApiGroupService from "../../services/api-group-service";
 interface IGroupProps {
   groupId: string | undefined;
   categoryId: string | undefined;
@@ -53,12 +55,23 @@ export default class Group extends Component<IGroupProps, IGroupExtend> {
     }
   }
 
+  deleteGroup = async () => {
+    const { projectId, categoryId, groupId } = this.props;
+    console.log(this.props)
+    if (projectId && categoryId && groupId) {
+      const api = new ApiGroupService();
+      await api.deleteGroup({ projectId, categoryId, groupId })
+      window.history.back();
+    }
+  }
+
   render() {
     const items = this.renderItems();
 
     return (
       <div>
         <Header text={this.state.title} icon="albums" description={this.state.description} />
+        <Button danger onClick={this.deleteGroup}>Удалить группу</Button>
         <div className="flex-wrapper">{items}</div>
       </div>
     );
