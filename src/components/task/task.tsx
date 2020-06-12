@@ -7,6 +7,8 @@ import { comment } from '../comment/comment';
 import TaskCard from './task-card';
 import ApiTaskService from '../../services/api-task-service';
 import CommentCreate from '../comment-create';
+import { Button } from 'antd';
+import AddResponsible from '../add-responsible';
 
 interface ITaskProps {
   taskId: string | undefined;
@@ -103,11 +105,16 @@ export default class Task extends Component<ITaskProps, ITaskState> {
           handleClick={this.handleClick}
           deleteTask={this.deleteTask}
         />
+        
         <div style={{ margin: 50 }}>
-          <h2>Написать комментаий</h2>
+          
           {projectId && categoryId && groupId && taskId
-            ? <CommentCreate projectId={projectId} categoryId={categoryId}
-              groupId={groupId} taskId={taskId} />
+            ? <>
+            <AddResponsible projectId={projectId} categoryId={categoryId}
+              groupId={groupId} taskId={taskId}/>
+              <h2 style={{marginTop:40}}>Написать комментаий</h2>
+            <CommentCreate projectId={projectId} categoryId={categoryId}
+              groupId={groupId} taskId={taskId} /></>
             : ''
           }
         </div>

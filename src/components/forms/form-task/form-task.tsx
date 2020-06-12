@@ -6,6 +6,7 @@ import { SelectCategory, SelectGroup, SelectProject } from '../form-select';
 import moment from 'moment';
 import 'moment/locale/ru';
 import ApiTaskService from '../../../services/api-task-service';
+import { message } from 'antd';
 
 interface IFromTaskState {
   title: string;
@@ -61,7 +62,7 @@ export default class FormTask extends Component<{}, IFromTaskState> {
   SendForm = async () => {
     const { title, description, content, projectId, categoryId, groupId, expiredDate } = this.state;
     await this.apiService.saveTask({ title, description, content, projectId, categoryId, groupId, expiredDate });
-
+    message.success('Задача успешно создана');
   };
 
   render () {

@@ -47,6 +47,7 @@ export interface IParticipant {
 export interface IUser {
   username: string,
   email: string,
+  id: number | string 
 }
 
 export interface ICategory {
