@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import "./task.css";
-import ApiService from "../../services/api-service";
-import { statusType } from "../status/status";
-import Comment from "../comment";
-import { comment } from "../comment/comment";
-import TaskCard from "./task-card";
+import React, { Component } from 'react';
+import './task.css';
+import ApiService from '../../services/api-service';
+import { statusType } from '../status/status';
+import Comment from '../comment';
+import { comment } from '../comment/comment';
+import TaskCard from './task-card';
+import ApiTaskService from '../../services/api-task-service';
 
 interface ITaskProps {
   taskId: string | undefined;
@@ -25,35 +26,35 @@ interface ITaskState {
 }
 
 const initionalState: ITaskState = {
-  id: "",
-  title: "",
-  description: "",
-  text: "",
-  status: "unknown",
+  id: '',
+  title: '',
+  description: '',
+  text: '',
+  status: 'unknown',
   comments: [
     {
-      text: "",
+      text: '',
       author: {
-        email: "",
-        id: "",
+        email: '',
+        id: '',
       },
       link: {
-        url: "",
-        text: "",
+        url: '',
+        text: '',
       },
     },
   ],
 };
 
 export default class Task extends Component<ITaskProps, ITaskState> {
-  constructor(props: ITaskProps) {
+  constructor (props: ITaskProps) {
     super(props);
     this.state = initionalState;
   }
 
   apiService = new ApiService();
 
-  componentDidMount() {
+  componentDidMount () {
     const { projectId, categoryId, groupId, taskId } = this.props;
     if (projectId && categoryId && groupId && taskId) {
       this.apiService.getTask(projectId, categoryId, groupId, taskId).then((res: any) => {
@@ -69,10 +70,19 @@ export default class Task extends Component<ITaskProps, ITaskState> {
   }
 
   handleClick = () => {
-    window.alert("Вы начали выполнение задачи");
+    window.alert('Вы начали выполнение задачи');
   };
 
-  render() {
+  deleteTask = async () => {
+    const { projectId, categoryId, groupId, taskId } = this.props;
+    if (projectId && categoryId && groupId && taskId) {
+      const api = new ApiTaskService();
+      await api.deleteTask({ projectId, categoryId, groupId, taskId });
+      window.history.back();
+    }
+  };
+
+  render () {
     console.log(this.state);
     const { title, description, text } = this.state;
     return (
@@ -83,8 +93,9 @@ export default class Task extends Component<ITaskProps, ITaskState> {
           description={description}
           status={this.state.status}
           handleClick={this.handleClick}
+          deleteTask={this.deleteTask}
         />
-        <Comment taskId={this.props.taskId} comments={this.state.comments} />
+        <Comment taskId={this.props.taskId} comments={this.state.comments}/>
       </div>
     );
   }

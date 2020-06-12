@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './form-task.css';
 import TaskInputs from './task-inputs';
 import { SelectCategory, SelectGroup, SelectProject } from '../form-select';
-import ApiService from '../../../services/api-service';
 import moment from 'moment';
 import 'moment/locale/ru';
 import ApiTaskService from '../../../services/api-task-service';
@@ -61,7 +60,7 @@ export default class FormTask extends Component<{}, IFromTaskState> {
   apiService = new ApiTaskService();
   SendForm = async () => {
     const { title, description, content, projectId, categoryId, groupId, expiredDate } = this.state;
-    await this.apiService.saveTask(title, description, content, projectId, categoryId, groupId, expiredDate );
+    await this.apiService.saveTask({ title, description, content, projectId, categoryId, groupId, expiredDate });
 
   };
 

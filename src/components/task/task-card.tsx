@@ -1,6 +1,8 @@
 import React from "react";
 import Status from "../status";
 import { statusType } from "../status/status";
+import { Button } from 'antd';
+import ApiTaskService from '../../services/api-task-service';
 
 interface ITaskCard {
   title: string;
@@ -8,10 +10,12 @@ interface ITaskCard {
   text: string;
   status: statusType;
   handleClick: () => void;
+  deleteTask: ()=>void;
 }
 
 const TaskCard = (props: ITaskCard) => {
   let btn = <></>;
+
   switch (props.status) {
     case "available":
       btn = (
@@ -30,6 +34,7 @@ const TaskCard = (props: ITaskCard) => {
       <p className="task__description">{props.description}</p>
       <div className="task__text">{props.text}</div>
       {btn}
+      <Button danger onClick={props.deleteTask}>Удалить задачу</Button>
     </div>
   );
 };
