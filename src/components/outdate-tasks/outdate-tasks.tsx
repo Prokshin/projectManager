@@ -18,7 +18,7 @@ const OutDateTasks = () => {
     size="large"
     bordered
     dataSource={tasks}
-    renderItem={item => <List.Item><h2>{item.title}<Status status={item.status}/></h2> <p>{item.description}</p> <p>{item.expiredDate}</p>
+    renderItem={item => <List.Item style={{position: "relative"}}><h2>{item.title}<Status status={item.status}/></h2> <p>{item.description}</p> <p>{item.expiredDate}</p>
     </List.Item>}
   />
 };

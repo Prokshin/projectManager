@@ -17,7 +17,8 @@ const AddParticipant:React.FC<AddParticipantProps> = ({projectId}) => {
   const onFinish = async (values:any) => {
     console.log('Success:', values);
     const apiService =  new ApiParticipantService();
-    await apiService.addParticipant(values.email, projectId)
+    await apiService.addParticipant(values.email, projectId);
+    window.location.reload();
   };
 
   const onFinishFailed = (errorInfo:any) => {

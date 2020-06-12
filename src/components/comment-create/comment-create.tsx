@@ -14,6 +14,7 @@ const CommentCreate: React.FC<ICommentCreateProps> = ({projectId, categoryId, gr
     console.log('Success:', values);
     const api = new ApiCommentService();
     await api.createComment({ text: values.text, projectId, categoryId, groupId, taskId })
+    window.location.reload();
   };
 
   const onFinishFailed = (errorInfo: any) => {
