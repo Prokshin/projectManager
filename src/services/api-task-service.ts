@@ -8,6 +8,10 @@ export default class ApiTaskService {
     this.requestService = new RequestService();
   }
 
+  getTask = async({projectId, categoryId, groupId, taskId}:ITaskInput) =>{
+    return await this.requestService.getRequest(`project/${projectId}/category/${categoryId}/group/${groupId}/task/${taskId}`)
+  }
+
   saveTask = async (
     { title, description, content, expiredDate, projectId, categoryId ,groupId} :ITaskCreateInput
   ) => {
@@ -21,10 +25,15 @@ export default class ApiTaskService {
       },
     );
   };
-  deleteTask = async ({projectId, categoryId, groupId, taskId}:ITaskDeleteInput) =>{
+  deleteTask = async ({projectId, categoryId, groupId, taskId}:ITaskInput) =>{
     await this.requestService.deleteRequest(`project/${projectId}/category/${categoryId}/group/${groupId}/task/${taskId}`)
   }
+
+  updateStatus = async({projectId, categoryId, groupId, taskId}:ITaskInput) =>{
+    await this.requestService.putRequest<any>(`project/${projectId}/category/${categoryId}/group/${groupId}/task/${taskId}/status?status=COMPLETED`, {})
+  }
 }
+
 
 interface ITaskCreateInput {
   title: string,
@@ -36,7 +45,7 @@ interface ITaskCreateInput {
   expiredDate: string | null
 }
 
-interface ITaskDeleteInput {
+interface ITaskInput {
   projectId: string,
   categoryId: string,
   groupId: string,

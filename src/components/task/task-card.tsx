@@ -10,18 +10,18 @@ interface ITaskCard {
   text: string;
   status: statusType;
   handleClick: () => void;
-  deleteTask: ()=>void;
+  deleteTask: () => void;
 }
 
 const TaskCard = (props: ITaskCard) => {
   let btn = <></>;
 
   switch (props.status) {
-    case "available":
+    case "IN_PROGRESS":
       btn = (
-        <button onClick={props.handleClick} className="button green-bg">
-          Приступить
-        </button>
+        <Button onClick={props.handleClick} >
+          Завершить задачу
+        </Button>
       );
       break;
     default:
@@ -33,8 +33,10 @@ const TaskCard = (props: ITaskCard) => {
       <h1 className="task__title">{props.title}</h1>
       <p className="task__description">{props.description}</p>
       <div className="task__text">{props.text}</div>
-      {btn}
-      <Button danger onClick={props.deleteTask}>Удалить задачу</Button>
+      <div style={{marginTop:10}}>
+        {btn}
+        <Button danger onClick={props.deleteTask} style={{marginLeft: 20}}>Удалить задачу</Button>
+      </div>
     </div>
   );
 };

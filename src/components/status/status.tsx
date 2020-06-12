@@ -3,12 +3,10 @@ import React from "react";
 import "./status.css";
 
 export type statusType =
-  | "completed"
-  | "performed"
-  | "available"
-  | "not_available"
+  | "IN_PROGRESS"
+  | "COMPLETED"
   | undefined
-  | "unknown";
+  | null
 
 interface IStatusProps {
   status: statusType;
@@ -18,36 +16,19 @@ const Status = (props: IStatusProps) => {
   const { status } = props;
   let el = <span></span>;
   switch (status) {
-    case "available":
+    case "IN_PROGRESS":
       el = (
         <span className="status_available">
           <ion-icon name="ellipse" />
-          Доступно
-        </span>
-      );
-      break;
-    case "completed":
-      el = (
-        <span className="status_complated">
-          <ion-icon name="checkmark" />
-          Завершено
-        </span>
-      );
-      break;
-    case "performed":
-      el = (
-        <span className="status_performed">
-          {" "}
-          <ion-icon name="sync" />
           Выполняется
         </span>
       );
       break;
-    case "not_available":
+    case "COMPLETED":
       el = (
-        <span className="status_not-available">
-          <ion-icon name="close" />
-          Недоступно
+        <span className="status_complated">
+          <ion-icon name="checkmark" />
+          Завершено
         </span>
       );
       break;

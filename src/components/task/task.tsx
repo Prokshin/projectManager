@@ -20,7 +20,7 @@ interface ITaskState {
   title: string;
   description?: string;
   text: string;
-  status?: statusType;
+  status: statusType;
   creator?: string;
   deadline?: Date;
   comments?: comment[];
@@ -31,7 +31,7 @@ const initionalState: ITaskState = {
   title: '',
   description: '',
   text: '',
-  status: 'unknown',
+  status: 'IN_PROGRESS',
   comments: [
     {
       text: '',
@@ -48,17 +48,17 @@ const initionalState: ITaskState = {
 };
 
 export default class Task extends Component<ITaskProps, ITaskState> {
-  constructor (props: ITaskProps) {
+  constructor(props: ITaskProps) {
     super(props);
     this.state = initionalState;
   }
 
-  apiService = new ApiService();
+  apiService = new ApiTaskService();
 
-  componentDidMount () {
+  componentDidMount() {
     const { projectId, categoryId, groupId, taskId } = this.props;
     if (projectId && categoryId && groupId && taskId) {
-      this.apiService.getTask(projectId, categoryId, groupId, taskId).then((res: any) => {
+      this.apiService.getTask({ projectId, categoryId, groupId, taskId }).then((res: any) => {
         this.setState({
           title: res.title,
           description: res.description,
@@ -72,6 +72,12 @@ export default class Task extends Component<ITaskProps, ITaskState> {
 
   handleClick = () => {
     window.alert('Вы начали выполнение задачи');
+    const { projectId, categoryId, groupId, taskId } = this.props;
+    if (projectId && categoryId && groupId && taskId) {
+      this.apiService.updateStatus({ projectId, categoryId, groupId, taskId }).then(() => {
+        window.location.reload();
+      })
+    }
   };
 
   deleteTask = async () => {
@@ -83,7 +89,7 @@ export default class Task extends Component<ITaskProps, ITaskState> {
     }
   };
 
-  render () {
+  render() {
     console.log(this.state);
     const { title, description, text } = this.state;
     const { projectId, categoryId, groupId, taskId } = this.props;
@@ -97,9 +103,15 @@ export default class Task extends Component<ITaskProps, ITaskState> {
           handleClick={this.handleClick}
           deleteTask={this.deleteTask}
         />
-        {projectId && categoryId && groupId && taskId ? <CommentCreate projectId={projectId} categoryId={categoryId}
-                                                                       groupId={groupId} taskId={taskId}/> : ''}
-        <Comment taskId={this.props.taskId} comments={this.state.comments}/>
+        <div style={{ margin: 50 }}>
+          <h2>Написать комментаий</h2>
+          {projectId && categoryId && groupId && taskId
+            ? <CommentCreate projectId={projectId} categoryId={categoryId}
+              groupId={groupId} taskId={taskId} />
+            : ''
+          }
+        </div>
+        <Comment taskId={this.props.taskId} comments={this.state.comments} />
       </div>
     );
   }

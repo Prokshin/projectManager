@@ -54,7 +54,7 @@ export default class Category extends Component<ICategoryProps, ICategoryExtend>
         <Card
           key={index}
           id={el.id}
-          status="unknown"
+          status = {null}
           title={el.title}
           description={el.description}
         />

@@ -2,19 +2,20 @@ import React from "react";
 import "./card.css";
 import { Link, useRouteMatch } from "react-router-dom";
 import Status from "../status";
+import { statusType } from "../status/status";
 
 //Добавить deadline
 interface CardProps {
   id: string | undefined;
   title: string | undefined;
   description: string | undefined;
-  status?: "completed" | "performed" | "available" | "not_available" | "unknown";
+  status?: statusType;
 }
 
 const Card: React.FC<CardProps> = props => {
   const match = useRouteMatch();
 
-  const { title, description, id = "", status = "unknown" } = props;
+  const { title, description, id = "", status = null } = props;
   return (
     <Link to={`${match.url}/${id}`}>
       <div className="card">
