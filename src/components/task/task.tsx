@@ -6,6 +6,7 @@ import Comment from '../comment';
 import { comment } from '../comment/comment';
 import TaskCard from './task-card';
 import ApiTaskService from '../../services/api-task-service';
+import CommentCreate from '../comment-create';
 
 interface ITaskProps {
   taskId: string | undefined;
@@ -85,6 +86,7 @@ export default class Task extends Component<ITaskProps, ITaskState> {
   render () {
     console.log(this.state);
     const { title, description, text } = this.state;
+    const { projectId, categoryId, groupId, taskId } = this.props;
     return (
       <div>
         <TaskCard
@@ -95,6 +97,8 @@ export default class Task extends Component<ITaskProps, ITaskState> {
           handleClick={this.handleClick}
           deleteTask={this.deleteTask}
         />
+        {projectId && categoryId && groupId && taskId ? <CommentCreate projectId={projectId} categoryId={categoryId}
+                                                                       groupId={groupId} taskId={taskId}/> : ''}
         <Comment taskId={this.props.taskId} comments={this.state.comments}/>
       </div>
     );
