@@ -1,9 +1,11 @@
+import { statusType } from "../components/status/status";
+
 export interface ITask{
   id: number,
   title: string,
   description: string,
   expiredDate: string | null,
-  status: string,
+  status: statusType,
   createDate: string | null
 }
 

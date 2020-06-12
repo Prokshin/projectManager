@@ -4,6 +4,7 @@ import { IProject } from "../components/projects/projects";
 import { IProjectMin } from "../components/forms/form-select/select-project";
 import { ICategoryMin } from "../components/forms/form-select/select-category";
 import { IGroupMin } from "../components/forms/form-select/select-group";
+import { statusType } from "../components/status/status";
 
 interface ICreator {
   id: string;
@@ -41,6 +42,7 @@ export interface IGroupExtend {
   id: string;
   title: string;
   description: string;
+
   tasks: ITask[];
 }
 
@@ -48,6 +50,7 @@ interface ITask {
   id: string;
   title: string;
   description: string;
+  status: statusType;
 }
 
 export interface ITaskExtend {

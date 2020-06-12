@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DashboardService from '../../services/dashboard-service';
 import { List } from 'antd';
 import { ITask } from '../../types/model-types';
+import Status from '../status';
 
 const OutDateTasks = () => {
   const [tasks, setTasks] = useState<ITask[]>();
@@ -17,7 +18,7 @@ const OutDateTasks = () => {
     size="large"
     bordered
     dataSource={tasks}
-    renderItem={item => <List.Item><h2>{item.title}</h2> <p>{item.description}</p> <p>{item.expiredDate}</p>
+    renderItem={item => <List.Item><h2>{item.title}<Status status={item.status}/></h2> <p>{item.description}</p> <p>{item.expiredDate}</p>
     </List.Item>}
   />
 };

@@ -19,6 +19,7 @@ const initialState: IGroupExtend = {
       id: "",
       title: "",
       description: "",
+      status: "IN_PROGRESS"
     },
   ],
 };
@@ -48,7 +49,7 @@ export default class Group extends Component<IGroupProps, IGroupExtend> {
             id={el.id}
             title={el.title}
             description={el.description}
-            status={null}
+            status={el.status}
           />
         );
       });
