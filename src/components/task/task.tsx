@@ -60,7 +60,7 @@ export default class Task extends Component<ITaskProps, ITaskState> {
         this.setState({
           title: res.title,
           description: res.description,
-          text: res.taskContent.text,
+          text: res.content.text,
           status: res.status,
           comments: res.comments,
         });

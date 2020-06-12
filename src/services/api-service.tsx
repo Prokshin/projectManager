@@ -54,8 +54,10 @@ export interface ITaskExtend {
   id: string;
   title: string;
   description: string;
-  taskContent: {
-    id: string;
+  expiredDate: Date,
+  status: string,
+  createDate: Date,
+  content: {
     text: string;
   };
   comments: IComment[];
@@ -202,6 +204,7 @@ export default class ApiService {
         title,
         description,
         content,
+        expiredDate: "13.06.2020"
       },
     );
     return result;

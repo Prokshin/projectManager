@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ApiService, { IProjectExtend } from "../../services/api-service";
 import Card from "../card";
 import Header from "../header";
+import AddParticipant from '../add-participant';
 
 interface IProjectProps {
   projectId: string | undefined;
@@ -44,11 +45,13 @@ export default class Project extends Component<IProjectProps, IProjectExtend> {
     return (
       <div>
         <Header text={title} icon="folder" description={description} />
+        {this.props.projectId ? <AddParticipant projectId={this.props.projectId}/> : ''}
         <div className="flex-wrapper">
           {category.map((el, index) => {
             return <Card key={index} id={el.id} title={el.title} description={el.description} />;
           })}
         </div>
+
       </div>
     );
   }
