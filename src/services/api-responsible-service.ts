@@ -1,5 +1,5 @@
 import RequestService, { IRequestService } from './request';
-import { IParticipant } from '../types/model-types';
+import { IParticipant, ITask } from '../types/model-types';
 
 export default class ApiResponsibleService {
   private readonly requestService: IRequestService;
@@ -8,8 +8,8 @@ export default class ApiResponsibleService {
     this.requestService = new RequestService();
   }
 
-  getResponsible = async (projectId: string) => {
-    return await this.requestService.getRequest<IParticipant[]>(`project/my`)
+  getResponsible = async () => {
+    return await this.requestService.getRequest<ITask[]>(`project/my`)
   };
 
   addResponsible = async ({projectId, categoryId, groupId, taskId, userId}:IResponsibleInput ) => {
