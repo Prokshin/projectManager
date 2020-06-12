@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ApiService, { ICategoryExtend } from "../../services/api-service";
 import Card from "../card";
 import Header from "../header";
+import { Button } from "antd";
+import ApiCategoryService from "../../services/api-category-service";
 
 interface ICategoryProps {
   categoryId: string | undefined;
@@ -60,16 +62,24 @@ export default class Category extends Component<ICategoryProps, ICategoryExtend>
     });
   }
 
+
+  deleteCategory = async () =>{
+    const{projectId, categoryId} = this.props;
+    if(projectId && categoryId){
+      const api = new ApiCategoryService();
+      await api.deleteCategory({projectId, categoryId})
+      window.history.back();
+    }
+  }
+
   render() {
     const items = this.renderItems();
     const { title, description } = this.state;
     return (
       <div>
         <Header text={title} icon="shapes" description={description} />
+        <Button danger onClick={this.deleteCategory}>Удалить категорию</Button>
         <div className="flex-wrapper">{items}</div>
-        {/* <Header text="Задачи основной группы" icon="albums" size="middle" /> */
-        /* //!Костыль с groupId, UPDATE: ВСЁ КОТСЫЛЬ, ПЕРЕДЕЛАТЬ!!!!
-        <Group type="without_header" groupId="main" /> */}
       </div>
     );
   }
