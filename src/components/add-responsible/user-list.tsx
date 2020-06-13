@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { List } from "antd";
-import { IUser } from "../../types/model-types";
+import { IUser, IParticipant } from "../../types/model-types";
 import ApiResponsibleService from "../../services/api-responsible-service";
 import ApiParticipantService from "../../services/api-participant-service";
 
@@ -14,7 +14,7 @@ const UserList: React.FC<IUserListProps> = ({projectId,selectUser}) =>{
     const select = (i:number | string)=>{
         selectUser(i.toString())
     }
-    const [users, setUsers] = useState<IUser[]>();
+    const [users, setUsers] = useState<IParticipant[]>();
     useEffect(()=>{
         const fetchData = async () => {
           const Api = new ApiParticipantService();

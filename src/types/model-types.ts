@@ -1,6 +1,6 @@
 import { statusType } from "../components/status/status";
 
-export interface ITask{
+export interface ITask {
   id: number,
   title: string,
   description: string,
@@ -16,7 +16,7 @@ export interface IComment {
   author: IParticipant
 }
 
-export interface ITaskFull{
+export interface ITaskFull {
   id: number,
   title: string,
   description: string,
@@ -47,18 +47,25 @@ export interface IParticipant {
 export interface IUser {
   username: string,
   email: string,
-  id: number | string 
+  id: number | string,
+  registrationDate: string
 }
 
 export interface ICategory {
   id: number,
-    title: string,
-    description: string,
-    groups: [
-        {
-            id: number,
-            title: string,
-            description: string
-        }
-    ]
+  title: string,
+  description: string,
+  groups: [
+    {
+      id: number,
+      title: string,
+      description: string
+    }
+  ]
+}
+
+export interface IStatistics {
+  outdate: number,
+  total: number,
+  completed: number
 }
